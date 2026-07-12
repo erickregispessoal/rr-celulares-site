@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>R.R Celulares - Assistência Técnica Especializada</title>
+  <title>R.R Celulares & Scooters</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
@@ -11,68 +11,73 @@
     body { font-family: 'Inter', sans-serif; color: #1a1a2e; overflow-x: hidden; }
     html { scroll-behavior: smooth; }
 
+    :root {
+      --red: #dc2626;
+      --red-dark: #b91c1c;
+      --red-light: #ef4444;
+      --red-bg: rgba(220, 38, 38, 0.08);
+    }
+
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-    /* Header */
     .header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: rgba(26, 26, 46, 0.95); backdrop-filter: blur(12px);
-      padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(15, 15, 35, 0.97); backdrop-filter: blur(12px);
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .header .container { display: flex; align-items: center; justify-content: space-between; }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .logo-icon {
-      width: 40px; height: 40px; background: linear-gradient(135deg, #00d4ff, #0072ff);
+      width: 40px; height: 40px; background: linear-gradient(135deg, var(--red), var(--red-dark));
       border-radius: 10px; display: flex; align-items: center; justify-content: center;
       font-weight: 900; font-size: 18px; color: #fff;
     }
-    .logo-text { color: #fff; font-weight: 800; font-size: 20px; letter-spacing: -0.5px; }
-    .logo-text span { color: #00d4ff; }
-    .nav { display: flex; gap: 28px; align-items: center; }
+    .logo-text { color: #fff; font-weight: 800; font-size: 22px; letter-spacing: -0.5px; }
+    .logo-text span { color: var(--red-light); }
+    .nav { display: flex; gap: 24px; align-items: center; }
     .nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
-    .nav a:hover { color: #00d4ff; }
+    .nav a:hover { color: var(--red-light); }
     .nav-btn {
-      background: linear-gradient(135deg, #00d4ff, #0072ff); color: #fff; border: none;
-      padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer;
+      background: linear-gradient(135deg, var(--red), var(--red-dark)); color: #fff; border: none;
+      padding: 10px 22px; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer;
       text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
     }
-    .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,116,255,0.4); }
+    .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(220,38,38,0.4); }
     .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .menu-toggle span { width: 26px; height: 2.5px; background: #fff; border-radius: 2px; transition: 0.3s; }
 
-    /* Hero */
     .hero {
       min-height: 100vh; display: flex; align-items: center; position: relative;
-      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 40%, #0d1b2a 100%);
+      background: linear-gradient(135deg, #0f0f23 0%, #1a0a0a 40%, #0f0f23 100%);
       padding-top: 80px; overflow: hidden;
     }
     .hero::before {
       content: ''; position: absolute; top: -50%; right: -30%; width: 800px; height: 800px;
-      background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(220,38,38,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero::after {
       content: ''; position: absolute; bottom: -30%; left: -20%; width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(0,114,255,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(220,38,38,0.05) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero .container { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
     .hero-badge {
-      display: inline-block; background: rgba(0,212,255,0.12); color: #00d4ff;
+      display: inline-block; background: var(--red-bg); color: var(--red-light);
       padding: 6px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; margin-bottom: 20px;
-      border: 1px solid rgba(0,212,255,0.2);
+      border: 1px solid rgba(220,38,38,0.2);
     }
     .hero h1 { font-size: 52px; font-weight: 900; color: #fff; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px; }
-    .hero h1 span { background: linear-gradient(135deg, #00d4ff, #0072ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero h1 span { background: linear-gradient(135deg, var(--red-light), var(--red)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero p { font-size: 18px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 32px; max-width: 520px; }
     .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
-      background: linear-gradient(135deg, #00d4ff, #0072ff); color: #fff; border: none;
+      background: linear-gradient(135deg, var(--red), var(--red-dark)); color: #fff; border: none;
       padding: 16px 32px; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer;
       text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,116,255,0.45); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(220,38,38,0.45); }
     .btn-secondary {
       display: inline-flex; align-items: center; gap: 8px;
       background: rgba(255,255,255,0.06); color: #fff; border: 1px solid rgba(255,255,255,0.12);
@@ -92,15 +97,13 @@
     }
     .hero-card-item .icon { font-size: 32px; margin-bottom: 8px; display: block; }
     .hero-card-item .label { color: rgba(255,255,255,0.5); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-    .hero-card-item .value { color: #fff; font-size: 14px; font-weight: 700; margin-top: 4px; }
+    .hero-card-item .value { color: var(--red-light); font-size: 14px; font-weight: 700; margin-top: 4px; }
 
-    /* Stats */
     .stats { background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 48px 0; }
     .stats .container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
-    .stat-number { font-size: 36px; font-weight: 900; color: #00d4ff; }
+    .stat-number { font-size: 36px; font-weight: 900; color: var(--red-light); }
     .stat-label { color: rgba(255,255,255,0.5); font-size: 14px; margin-top: 4px; font-weight: 500; }
 
-    /* Sections general */
     .section { padding: 100px 0; }
     .section-dark { background: #0f0f23; }
     .section-light { background: #f8f9fc; }
@@ -114,53 +117,74 @@
     .mb-48 { margin-bottom: 48px; }
     .mx-auto { margin-left: auto; margin-right: auto; }
 
-    /* Services */
+    .tabs {
+      display: flex; justify-content: center; gap: 8px; margin-bottom: 40px;
+      background: rgba(255,255,255,0.04); border-radius: 12px; padding: 4px; max-width: 400px; margin-left: auto; margin-right: auto;
+    }
+    .tab-btn {
+      flex: 1; padding: 12px 24px; border: none; background: transparent; color: rgba(255,255,255,0.4);
+      font-weight: 600; font-size: 14px; cursor: pointer; border-radius: 8px; transition: 0.2s; font-family: 'Inter', sans-serif;
+    }
+    .tab-btn.active { background: var(--red); color: #fff; }
+    .tab-btn:hover:not(.active) { color: rgba(255,255,255,0.7); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .service-card {
       background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px; padding: 32px 24px; transition: transform 0.3s, border-color 0.3s;
     }
-    .service-card:hover { transform: translateY(-4px); border-color: rgba(0,212,255,0.3); }
+    .service-card:hover { transform: translateY(-4px); border-color: rgba(220,38,38,0.3); }
     .service-icon { font-size: 40px; margin-bottom: 16px; display: block; }
     .service-card h3 { color: #fff; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
     .service-card p { color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.6; }
 
-    /* Pricing */
+    .scooters-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .scooter-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; overflow: hidden; transition: transform 0.3s, border-color 0.3s;
+    }
+    .scooter-card:hover { transform: translateY(-4px); border-color: rgba(220,38,38,0.3); }
+    .scooter-img {
+      width: 100%; aspect-ratio: 16/10; background: linear-gradient(135deg, #1a0a0a, #2a1a1a);
+      display: flex; align-items: center; justify-content: center; font-size: 48px; color: rgba(255,255,255,0.15);
+    }
+    .scooter-info { padding: 20px; }
+    .scooter-info h3 { color: #fff; font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .scooter-info .price { color: var(--red-light); font-size: 22px; font-weight: 800; }
+    .scooter-info p { color: rgba(255,255,255,0.4); font-size: 13px; margin-top: 8px; line-height: 1.5; }
+
     .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .pricing-card {
       background: #fff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 36px 28px;
       transition: transform 0.3s, box-shadow 0.3s; position: relative;
     }
     .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 12px 48px rgba(0,0,0,0.08); }
-    .pricing-card.featured {
-      border-color: #0072ff; box-shadow: 0 0 0 1px #0072ff;
-    }
+    .pricing-card.featured { border-color: var(--red); box-shadow: 0 0 0 1px var(--red); }
     .pricing-card.featured::before {
       content: 'Mais Pedido'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: linear-gradient(135deg, #00d4ff, #0072ff); color: #fff;
+      background: linear-gradient(135deg, var(--red-light), var(--red)); color: #fff;
       padding: 4px 20px; border-radius: 100px; font-size: 12px; font-weight: 700; text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    .pricing-service { font-size: 13px; font-weight: 600; color: #0072ff; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .pricing-service { font-size: 13px; font-weight: 600; color: var(--red); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
     .pricing-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
     .pricing-price { font-size: 42px; font-weight: 900; color: #1a1a2e; margin-bottom: 4px; }
     .pricing-price span { font-size: 16px; font-weight: 500; color: #9ca3af; }
     .pricing-note { color: #9ca3af; font-size: 13px; margin-bottom: 20px; }
     .pricing-features { list-style: none; padding: 0; margin: 0 0 24px; }
     .pricing-features li { padding: 8px 0; font-size: 14px; color: #4b5563; display: flex; align-items: center; gap: 8px; }
-    .pricing-features li::before { content: '✓'; color: #00d4ff; font-weight: 700; }
+    .pricing-features li::before { content: '✓'; color: var(--red-light); font-weight: 700; }
 
-    /* Gallery */
     .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .gallery-item {
       aspect-ratio: 1; border-radius: 12px; overflow: hidden; position: relative;
-      background: linear-gradient(135deg, #1a1a3e, #0d1b2a);
-      display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.3);
-      border: 1px solid rgba(255,255,255,0.06); font-size: 14px; text-align: center; padding: 16px;
+      background: linear-gradient(135deg, #1a0a0a, #0f0f23);
+      display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.06); font-size: 13px; text-align: center; padding: 16px;
     }
-    .gallery-item .ig-post { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
 
-    /* About */
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
     .about-features { list-style: none; padding: 0; margin-top: 24px; }
     .about-features li {
@@ -173,36 +197,33 @@
       border-radius: 20px; padding: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
     }
     .about-stat { text-align: center; }
-    .about-stat .number { font-size: 32px; font-weight: 900; color: #00d4ff; }
+    .about-stat .number { font-size: 32px; font-weight: 900; color: var(--red-light); }
     .about-stat .label { color: rgba(255,255,255,0.4); font-size: 13px; margin-top: 4px; }
 
-    /* Contact */
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
     .contact-info { display: flex; flex-direction: column; gap: 24px; }
     .contact-item { display: flex; align-items: center; gap: 16px; }
     .contact-icon {
-      width: 48px; height: 48px; background: #f0f4ff; border-radius: 12px;
+      width: 48px; height: 48px; background: #fef2f2; border-radius: 12px;
       display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;
     }
     .contact-item h4 { font-size: 14px; font-weight: 600; color: #6b7280; margin-bottom: 2px; }
     .contact-item p { font-size: 16px; font-weight: 600; color: #1a1a2e; }
     .contact-item a { color: #1a1a2e; text-decoration: none; }
-    .contact-item a:hover { color: #0072ff; }
+    .contact-item a:hover { color: var(--red); }
     .contact-form { display: flex; flex-direction: column; gap: 16px; }
     .contact-form input, .contact-form textarea {
       width: 100%; padding: 14px 18px; border: 1px solid #e5e7eb; border-radius: 10px;
       font-family: 'Inter', sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s;
     }
-    .contact-form input:focus, .contact-form textarea:focus { border-color: #0072ff; }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--red); }
     .contact-form textarea { min-height: 120px; resize: vertical; }
 
-    /* Footer */
     .footer {
       background: #0f0f23; border-top: 1px solid rgba(255,255,255,0.05); padding: 32px 0;
       text-align: center; color: rgba(255,255,255,0.3); font-size: 13px;
     }
 
-    /* WhatsApp Float */
     .whatsapp-float {
       position: fixed; bottom: 24px; right: 24px; z-index: 999;
       width: 60px; height: 60px; background: #25d366; border-radius: 50%;
@@ -212,22 +233,20 @@
     }
     .whatsapp-float:hover { transform: scale(1.1); }
 
-    /* Mobile */
     @media (max-width: 768px) {
       .nav { display: none; }
       .menu-toggle { display: flex; }
-      .nav.open { display: flex; flex-direction: column; position: fixed; top: 68px; left: 0; right: 0; background: rgba(26,26,46,0.98); padding: 24px; gap: 16px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .nav.open { display: flex; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: rgba(15,15,35,0.98); padding: 24px; gap: 16px; border-bottom: 1px solid rgba(255,255,255,0.06); }
       .hero .container { grid-template-columns: 1fr; gap: 40px; text-align: center; }
       .hero h1 { font-size: 34px; }
       .hero p { margin-left: auto; margin-right: auto; }
       .hero-actions { justify-content: center; }
       .hero-card { max-width: 100%; }
-      .hero-card-grid { grid-template-columns: 1fr 1fr; }
       .stats .container { grid-template-columns: repeat(2, 1fr); gap: 16px; }
       .stat-number { font-size: 28px; }
       .section { padding: 60px 0; }
       .section-title { font-size: 28px; }
-      .services-grid { grid-template-columns: 1fr; }
+      .services-grid, .scooters-grid { grid-template-columns: 1fr; }
       .pricing-grid { grid-template-columns: 1fr; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -237,12 +256,11 @@
 </head>
 <body>
 
-  <!-- Header -->
   <header class="header">
     <div class="container">
       <a href="#" class="logo">
         <div class="logo-icon">RR</div>
-        <span class="logo-text">R.R <span>Celulares</span></span>
+        <span class="logo-text">R.R <span>Celulares & Scooters</span></span>
       </a>
       <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -250,28 +268,23 @@
       <nav class="nav" id="nav">
         <a href="#sobre">Sobre</a>
         <a href="#servicos">Serviços</a>
+        <a href="#scooters">Scooters</a>
         <a href="#precos">Preços</a>
-        <a href="#galeria">Galeria</a>
         <a href="#contato">Contato</a>
         <a href="https://wa.me/5548988581637" target="_blank" class="nav-btn">WhatsApp</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero -->
   <section class="hero" id="home">
     <div class="container">
       <div class="hero-content">
-        <div class="hero-badge">🔧 Assistência Técnica em Santa Catarina</div>
-        <h1>Conserto de Celular<br><span>Rápido & Confiável</span></h1>
-        <p>Especialistas em reparo de iPhones e smartphones. Serviço de qualidade com garantia e atendimento personalizado. Conserto na hora!</p>
+        <div class="hero-badge">🔥 Referência em Santa Catarina</div>
+        <h1>Celulares & Scooters<br><span>Tudo que você precisa</span></h1>
+        <p>Assistência técnica especializada em celulares e venda de scooters. Qualidade, garantia e o melhor preço da região.</p>
         <div class="hero-actions">
-          <a href="https://wa.me/5548988581637" target="_blank" class="btn-primary">
-            📱 Fale no WhatsApp
-          </a>
-          <a href="#servicos" class="btn-secondary">
-            Ver Serviços ↓
-          </a>
+          <a href="https://wa.me/5548988581637" target="_blank" class="btn-primary">📱 Fale no WhatsApp</a>
+          <a href="#servicos" class="btn-secondary">Ver Serviços ↓</a>
         </div>
       </div>
       <div class="hero-image">
@@ -279,13 +292,13 @@
           <div class="hero-card-grid">
             <div class="hero-card-item">
               <span class="icon">📱</span>
-              <div class="label">Troca de Tela</div>
-              <div class="value">A partir de R$ 80</div>
+              <div class="label">Conserto Celular</div>
+              <div class="value">A partir de R$ 70</div>
             </div>
             <div class="hero-card-item">
-              <span class="icon">🔋</span>
-              <div class="label">Troca de Bateria</div>
-              <div class="value">A partir de R$ 70</div>
+              <span class="icon">🛵</span>
+              <div class="label">Scooters</div>
+              <div class="value">Consulte</div>
             </div>
             <div class="hero-card-item">
               <span class="icon">🔧</span>
@@ -303,7 +316,6 @@
     </div>
   </section>
 
-  <!-- Stats -->
   <section class="stats section-dark">
     <div class="container">
       <div><div class="stat-number">+500</div><div class="stat-label">Celulares Consertados</div></div>
@@ -313,76 +325,62 @@
     </div>
   </section>
 
-  <!-- Sobre -->
   <section class="section section-dark" id="sobre">
     <div class="container">
       <div class="about-grid">
         <div>
           <span class="hero-badge">Sobre Nós</span>
-          <h2 class="section-title text-white">Sua Loja de Confiança<br>para Reparos</h2>
+          <h2 class="section-title text-white">Sua Loja de Confiança</h2>
           <p class="section-subtitle" style="margin-top:16px;">
-            A R.R Celulares é referência em conserto de smartphones na região. Trabalhamos com 
-            reparos em iPhones, Samsung, Xiaomi e outras marcas. Nosso compromisso é devolver 
-            seu aparelho funcionando como novo, com agilidade e preço justo.
+            A R.R é referência em conserto de celulares e venda de scooters em Santa Catarina. 
+            Trabalhamos com reparos em iPhones, Samsung, Xiaomi e oferecemos scooters seminovasas 
+            revisadas com garantia. Nosso compromisso é qualidade e preço justo.
           </p>
           <ul class="about-features">
-            <li>Conserto na hora para a maioria dos reparos</li>
-            <li>Garantia em todos os serviços realizados</li>
+            <li>Conserto de celular na hora</li>
+            <li>Scooters revisadas com garantia</li>
             <li>Peças originais e de alta qualidade</li>
             <li>Entrega em todo o Brasil</li>
             <li>Aceitamos cartões e parcelamento</li>
           </ul>
         </div>
         <div class="about-stats-card">
-          <div class="about-stat">
-            <div class="number">🔧</div>
-            <div class="label">Reparo em Placa</div>
-          </div>
-          <div class="about-stat">
-            <div class="number">📱</div>
-            <div class="label">Troca de Tela</div>
-          </div>
-          <div class="about-stat">
-            <div class="number">🔋</div>
-            <div class="label">Troca de Bateria</div>
-          </div>
-          <div class="about-stat">
-            <div class="number">📲</div>
-            <div class="label">Venda de Usados</div>
-          </div>
+          <div class="about-stat"><div class="number">📱</div><div class="label">Conserto Celular</div></div>
+          <div class="about-stat"><div class="number">🛵</div><div class="label">Venda Scooters</div></div>
+          <div class="about-stat"><div class="number">🔋</div><div class="label">Troca Bateria</div></div>
+          <div class="about-stat"><div class="number">🔧</div><div class="label">Reparo Placa</div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Serviços -->
   <section class="section section-dark" id="servicos">
     <div class="container text-center mb-48">
-      <span class="hero-badge">Nossos Serviços</span>
-      <h2 class="section-title text-white">Tudo para seu Smartphone</h2>
-      <p class="section-subtitle mx-auto">Do reparo simples ao avançado, temos a solução ideal para seu aparelho.</p>
+      <span class="hero-badge">Serviços</span>
+      <h2 class="section-title text-white">Assistência Técnica de Celulares</h2>
+      <p class="section-subtitle mx-auto">Especialistas em todas as marcas. Conserto rápido com garantia.</p>
     </div>
     <div class="container">
       <div class="services-grid">
         <div class="service-card">
           <span class="service-icon">📱</span>
           <h3>Troca de Tela</h3>
-          <p>Substituição de tela quebrada ou trincada para iPhones e Android. Resultado impecável.</p>
+          <p>Substituição de tela quebrada para iPhones e Android. Resultado impecável.</p>
         </div>
         <div class="service-card">
           <span class="service-icon">🔋</span>
           <h3>Troca de Bateria</h3>
-          <p>Bateria nova com capacidade total. Adeus, descarregamento rápido!</p>
+          <p>Bateria nova com capacidade total. Adeus descarregamento rápido!</p>
         </div>
         <div class="service-card">
           <span class="service-icon">🔧</span>
           <h3>Reparo em Placa</h3>
-          <p>Solda e componentes especializados. Reparo lógico e de hardware em placas.</p>
+          <p>Reparo lógico e de hardware em placas de celular. Solda especializada.</p>
         </div>
         <div class="service-card">
           <span class="service-icon">🛡️</span>
           <h3>Tampa Traseira</h3>
-          <p>Troca de tampa traseira de iPhone. Deixe seu aparelho com aparência de novo.</p>
+          <p>Troca de tampa traseira de iPhone. Seu aparelho como novo.</p>
         </div>
         <div class="service-card">
           <span class="service-icon">📲</span>
@@ -398,12 +396,52 @@
     </div>
   </section>
 
-  <!-- Preços -->
+  <section class="section section-dark" id="scooters">
+    <div class="container text-center mb-48">
+      <span class="hero-badge">Scooters</span>
+      <h2 class="section-title text-white">Scooters Seminovasas</h2>
+      <p class="section-subtitle mx-auto">Todas revisadas, com garantia e prontas para pilotar.</p>
+    </div>
+    <div class="container">
+      <div class="scooters-grid">
+        <div class="scooter-card">
+          <div class="scooter-img">🛵</div>
+          <div class="scooter-info">
+            <h3>Scooter Elétrica</h3>
+            <div class="price">R$ 3.990</div>
+            <p>Autonomia 40km, bateria removível, ideal para cidade.</p>
+          </div>
+        </div>
+        <div class="scooter-card">
+          <div class="scooter-img">🛵</div>
+          <div class="scooter-info">
+            <h3>Scooter 150cc</h3>
+            <div class="price">R$ 6.990</div>
+            <p>Motor 150cc, partida elétrica, freio a disco.</p>
+          </div>
+        </div>
+        <div class="scooter-card">
+          <div class="scooter-img">🛵</div>
+          <div class="scooter-info">
+            <h3>Scooter 50cc</h3>
+            <div class="price">R$ 4.490</div>
+            <p>Econômica, leve e fácil de pilotar. Ideal para entregas.</p>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:24px;">
+        <a href="https://wa.me/5548988581637?text=Olá! Quero saber mais sobre as scooters." target="_blank" class="btn-primary" style="display:inline-flex;">
+          Perguntar disponibilidade →
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section class="section section-light" id="precos">
     <div class="container text-center mb-48">
-      <span class="hero-badge" style="background: rgba(0,114,255,0.1); color:#0072ff; border-color: rgba(0,114,255,0.2);">Tabela de Preços</span>
-      <h2 class="section-title">Preços Justos e Transparentes</h2>
-      <p class="section-subtitle mx-auto">Consulte-nos para outros modelos e serviços. Orçamento sem compromisso.</p>
+      <span class="hero-badge" style="background:rgba(220,38,38,0.08); color:var(--red); border-color:rgba(220,38,38,0.2);">Preços</span>
+      <h2 class="section-title">Tabela de Preços - Celulares</h2>
+      <p class="section-subtitle mx-auto">Consulte-nos para outros modelos. Orçamento sem compromisso.</p>
     </div>
     <div class="container">
       <div class="pricing-grid">
@@ -418,9 +456,7 @@
             <li>Garantia inclusa</li>
             <li>Instalação na hora</li>
           </ul>
-          <a href="https://wa.me/5548988581637?text=Olá! Tenho interesse na troca de tampa traseira de iPhone." target="_blank" class="btn-primary" style="width:100%;justify-content:center;padding:14px;">
-            Solicitar
-          </a>
+          <a href="https://wa.me/5548988581637?text=Olá! Tenho interesse na troca de tampa traseira de iPhone." target="_blank" class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Solicitar</a>
         </div>
         <div class="pricing-card featured">
           <div class="pricing-service">Smartphones</div>
@@ -433,9 +469,7 @@
             <li>Garantia de 90 dias</li>
             <li>Teste completo antes da entrega</li>
           </ul>
-          <a href="https://wa.me/5548988581637?text=Olá! Quero um orçamento para troca de tela." target="_blank" class="btn-primary" style="width:100%;justify-content:center;padding:14px;">
-            Solicitar Orçamento
-          </a>
+          <a href="https://wa.me/5548988581637?text=Olá! Quero um orçamento para troca de tela." target="_blank" class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Solicitar Orçamento</a>
         </div>
         <div class="pricing-card">
           <div class="pricing-service">Smartphones</div>
@@ -448,112 +482,69 @@
             <li>Garantia de 6 meses</li>
             <li>Troca rápida</li>
           </ul>
-          <a href="https://wa.me/5548988581637?text=Olá! Quero trocar a bateria do meu celular." target="_blank" class="btn-primary" style="width:100%;justify-content:center;padding:14px;">
-            Solicitar
-          </a>
+          <a href="https://wa.me/5548988581637?text=Olá! Quero trocar a bateria do meu celular." target="_blank" class="btn-primary" style="width:100%;justify-content:center;padding:14px;">Solicitar</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Galeria -->
-  <section class="section section-dark" id="galeria">
-    <div class="container text-center mb-48">
-      <span class="hero-badge">Galeria</span>
-      <h2 class="section-title text-white">Veja Nosso Trabalho</h2>
-      <p class="section-subtitle mx-auto">Acompanhe nossos serviços e novidades no Instagram @concertosrr</p>
-    </div>
-    <div class="container">
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <span>📸 Instagram<br><small>@concertosrr</small></span>
-        </div>
-        <div class="gallery-item">
-          <span>📸 Instagram<br><small>@concertosrr</small></span>
-        </div>
-        <div class="gallery-item">
-          <span>📸 Instagram<br><small>@concertosrr</small></span>
-        </div>
-        <div class="gallery-item">
-          <span>📸 Instagram<br><small>@concertosrr</small></span>
-        </div>
-        <div class="gallery-item">
-          <span>📸 Instagram<br><small>@concertosrr</small></span>
-        </div>
-        <div class="gallery-item">
-          <span>📸 Instagram<br><small>@concertosrr</small></span>
-        </div>
-      </div>
-      <div style="text-align:center;margin-top:24px;">
-        <a href="https://www.instagram.com/concertosrr/" target="_blank" class="btn-secondary" style="display:inline-flex;">
-          📷 Seguir no Instagram
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contato -->
-  <section class="section section-light" id="contato">
+  <section class="section section-dark" id="contato">
     <div class="container">
       <div class="contact-grid">
         <div>
-          <span class="hero-badge" style="background: rgba(0,114,255,0.1); color:#0072ff; border-color: rgba(0,114,255,0.2);">Contato</span>
-          <h2 class="section-title" style="margin-top:8px;">Fale Conosco</h2>
-          <p class="section-subtitle" style="margin-top:8px;">Estamos prontos para atender você. Tire suas dúvidas ou agende seu reparo.</p>
+          <span class="hero-badge">Contato</span>
+          <h2 class="section-title text-white" style="margin-top:8px;">Fale Conosco</h2>
+          <p class="section-subtitle" style="margin-top:8px;">Estamos prontos para atender você.</p>
           <div class="contact-info" style="margin-top:32px;">
             <div class="contact-item">
               <div class="contact-icon">📱</div>
               <div>
                 <h4>WhatsApp</h4>
-                <p><a href="https://wa.me/5548988581637" target="_blank">(48) 98858-1637</a></p>
+                <p style="color:#fff;"><a href="https://wa.me/5548988581637" target="_blank" style="color:var(--red-light);">(48) 98858-1637</a></p>
               </div>
             </div>
             <div class="contact-item">
               <div class="contact-icon">📍</div>
               <div>
-                <h4>Endereço</h4>
-                <p>Rua Maria Mans, 54 - Santa Catarina</p>
+                <h4 style="color:rgba(255,255,255,0.4);">Endereço</h4>
+                <p style="color:#fff;">Rua Maria Mans, 54 - Santa Catarina</p>
               </div>
             </div>
             <div class="contact-item">
-              <div class="contact-icon">📧</div>
+              <div class="contact-icon">📷</div>
               <div>
-                <h4>Instagram</h4>
-                <p><a href="https://www.instagram.com/concertosrr/" target="_blank">@concertosrr</a></p>
+                <h4 style="color:rgba(255,255,255,0.4);">Instagram</h4>
+                <p><a href="https://www.instagram.com/concertosrr/" target="_blank" style="color:var(--red-light);">@concertosrr</a></p>
               </div>
             </div>
             <div class="contact-item">
               <div class="contact-icon">⏰</div>
               <div>
-                <h4>Horário de Atendimento</h4>
-                <p>Seg-Sex: 9h às 19h | Sáb: 9h às 13h</p>
+                <h4 style="color:rgba(255,255,255,0.4);">Horário</h4>
+                <p style="color:#fff;">Seg-Sex: 9h às 19h | Sáb: 9h às 13h</p>
               </div>
             </div>
           </div>
         </div>
         <div>
           <form class="contact-form" onsubmit="handleForm(event)">
-            <input type="text" placeholder="Seu nome" required>
-            <input type="tel" placeholder="Seu WhatsApp" required>
-            <input type="text" placeholder="Modelo do aparelho">
-            <textarea placeholder="Descreva o problema do seu celular..." required></textarea>
-            <button type="submit" class="btn-primary" style="border:none;cursor:pointer;justify-content:center;">
-              Enviar via WhatsApp →
-            </button>
+            <input type="text" placeholder="Seu nome" required style="background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.1); color:#fff;">
+            <input type="tel" placeholder="Seu WhatsApp" required style="background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.1); color:#fff;">
+            <input type="text" placeholder="Modelo do aparelho / Scooter" style="background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.1); color:#fff;">
+            <textarea placeholder="Descreva o que você precisa..." required style="background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.1); color:#fff;"></textarea>
+            <button type="submit" class="btn-primary" style="border:none;cursor:pointer;justify-content:center;">Enviar via WhatsApp →</button>
           </form>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>© 2026 R.R Celulares. Todos os direitos reservados. | 🛠️ Assistência Técnica Especializada</p>
+      <p>&copy; 2026 R.R Celulares & Scooters. Todos os direitos reservados.</p>
     </div>
   </footer>
 
-  <!-- WhatsApp Float -->
   <a href="https://wa.me/5548988581637" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -561,19 +552,15 @@
   </a>
 
   <script>
-    function toggleMenu() {
-      document.getElementById('nav').classList.toggle('open');
-    }
-    document.querySelectorAll('.nav a').forEach(a => {
-      a.addEventListener('click', () => document.getElementById('nav').classList.remove('open'));
-    });
+    function toggleMenu() { document.getElementById('nav').classList.toggle('open'); }
+    document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', () => document.getElementById('nav').classList.remove('open')));
     function handleForm(e) {
       e.preventDefault();
       const name = e.target[0].value;
       const phone = e.target[1].value;
       const model = e.target[2].value;
       const problem = e.target[3].value;
-      const msg = `Olá! Me chamo ${name}.%0AWhatsApp: ${phone}%0AModelo: ${model || "Não informado"}%0AProblema: ${problem}`;
+      const msg = `Olá! Me chamo ${name}.%0AWhatsApp: ${phone}%0AModelo/Scooter: ${model || "Não informado"}%0AProblema: ${problem}`;
       window.open(`https://wa.me/5548988581637?text=${msg}`, '_blank');
     }
   </script>
