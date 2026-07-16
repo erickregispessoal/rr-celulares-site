@@ -1,0 +1,8 @@
+*.lnk
+desktop.ini
+*.zip
+AudiSortt38/
+node_modules/
+.wwebjs_cache/
+baileys-session/
+ww-session/
