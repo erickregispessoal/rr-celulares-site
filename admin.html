@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — RR Celulares</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.icon { display: inline-block; vertical-align: middle; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.icon-sm { width: 16px; height: 16px; }
+.icon-md { width: 20px; height: 20px; }
+.icon-lg { width: 24px; height: 24px; }
+.icon-whatsapp { fill: #fff; stroke: none; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0d0d0d;
+  color: #e0e0e0;
+  padding: 0;
+}
+
+.admin-header {
+  background: #1a0000;
+  border-bottom: 1px solid #333;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.admin-header h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ff4444;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-header h1 small {
+  font-weight: 400;
+  font-size: 0.7rem;
+  color: #666;
+}
+
+.header-actions { display: flex; gap: 8px; }
+
+.header-actions .btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+}
+
+.btn-view { background: #333; }
+.btn-view:hover { background: #444; }
+.btn-save { background: #25D366; }
+.btn-save:hover { opacity: 0.9; }
+.btn-reset { background: #CC0000; }
+.btn-reset:hover { opacity: 0.9; }
+
+.container { max-width: 1000px; margin: 0 auto; padding: 24px; }
+
+.section-card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.section-card h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  padding: 16px 20px;
+  background: #222;
+  border-bottom: 1px solid #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.section-card h2 .icon { color: #CC0000; flex-shrink: 0; }
+
+.section-card h2 .badge {
+  font-size: 0.7rem;
+  background: #333;
+  color: #999;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-weight: 400;
+  margin-left: auto;
+}
+
+.section-body { padding: 20px; }
+
+.form-grid { display: grid; gap: 16px; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
+label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 10px 12px;
+  background: #0d0d0d;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #e0e0e0;
+  font-size: 0.85rem;
+  font-family: 'Inter', sans-serif;
+}
+
+input:focus, textarea:focus { outline: none; border-color: #CC0000; }
+
+textarea { resize: vertical; min-height: 60px; }
+
+.field { margin-bottom: 12px; }
+
+.item-card {
+  background: #0d0d0d;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.item-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.item-card-header .title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.item-card-header .actions { display: flex; gap: 6px; }
+
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon:hover { opacity: 0.8; }
+
+.btn-icon .icon { stroke-width: 2; }
+
+.btn-icon.delete { background: rgba(204,0,0,0.2); }
+.btn-icon.delete .icon { color: #ff4444; }
+.btn-icon.move { background: #222; }
+.btn-icon.move .icon { color: #999; }
+
+.btn-add {
+  width: 100%;
+  padding: 12px;
+  background: #222;
+  border: 1px dashed #444;
+  border-radius: 8px;
+  color: #999;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.btn-add:hover { border-color: #CC0000; color: #CC0000; background: #1a0000; }
+
+.specs-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+
+.spec-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+}
+
+.spec-tag .remove-spec {
+  cursor: pointer;
+  color: #ff4444;
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+.img-upload {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.img-upload input[type="file"] { display: none; }
+
+.img-upload .upload-btn {
+  padding: 8px 16px;
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.img-upload .upload-btn:hover { border-color: #CC0000; }
+
+.img-preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0d0d0d;
+}
+
+.img-preview img { width: 100%; height: 100%; object-fit: cover; }
+
+.img-preview .no-img { color: #555; font-size: 0.7rem; }
+
+.img-remove {
+  font-size: 0.75rem;
+  color: #ff4444;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 14px 24px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  z-index: 999;
+  transform: translateY(80px);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.toast.show { transform: translateY(0); opacity: 1; }
+
+.toast.success { background: #25D366; }
+.toast.error { background: #CC0000; }
+
+.empty-state {
+  text-align: center;
+  padding: 32px;
+  color: #555;
+  font-size: 0.9rem;
+}
+</style>
+</head>
+<body>
+
+<svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="icon-phone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></symbol>
+    <symbol id="icon-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></symbol>
+    <symbol id="icon-bolt" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="icon-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="icon-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"/><line x1="22" y1="11" x2="22" y2="13"/><line x1="6" y1="11" x2="6" y2="13"/><line x1="10" y1="11" x2="10" y2="13"/><line x1="14" y1="11" x2="14" y2="13"/></symbol>
+    <symbol id="icon-water" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></symbol>
+    <symbol id="icon-speaker" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></symbol>
+    <symbol id="icon-circuit" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="icon-phone-code" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><polyline points="10 9 7 12 10 15"/><polyline points="14 9 17 12 14 15"/></symbol>
+    <symbol id="icon-scooter" viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9l-3-5H8"/><line x1="18" y1="9" x2="15" y2="15"/><line x1="6" y1="15" x2="6" y2="18"/><polyline points="8 4 5 8 10 11"/></symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="icon-camera" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></symbol>
+    <symbol id="icon-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="icon-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+    <symbol id="icon-phone-call" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+    <symbol id="icon-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol>
+    <symbol id="icon-list" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3" y2="6"/><line x1="3" y1="12" x2="3" y2="12"/><line x1="3" y1="18" x2="3" y2="18"/></symbol>
+    <symbol id="icon-edit" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></symbol>
+    <symbol id="icon-up" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></symbol>
+    <symbol id="icon-down" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol>
+    <symbol id="icon-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+    <symbol id="icon-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></symbol>
+    <symbol id="icon-speed" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="icon-ruler" viewBox="0 0 24 24"><path d="M16 2l6 6L8 22l-6-6L16 2"/><line x1="13" y1="5" x2="15" y2="7"/><line x1="10" y1="8" x2="12" y2="10"/><line x1="7" y1="11" x2="9" y2="13"/></symbol>
+  </defs>
+</svg>
+
+<div class="admin-header">
+  <h1>
+    <svg class="icon icon-lg" style="color:#ff4444;"><use href="#icon-gear"/></svg>
+    Painel Admin <small>RR Celulares</small>
+  </h1>
+  <div class="header-actions">
+    <a href="rr-celulares.html" target="_blank" class="btn btn-view">
+      <svg class="icon icon-sm" style="color:#fff;"><use href="#icon-phone"/></svg> Ver site
+    </a>
+    <button class="btn btn-save" onclick="saveAll()">
+      <svg class="icon icon-sm" style="fill:none;stroke:#fff;"><use href="#icon-check"/></svg> Salvar tudo
+    </button>
+    <button class="btn btn-reset" onclick="resetAll()">
+      <svg class="icon icon-sm" style="fill:none;stroke:#fff;"><use href="#icon-x"/></svg> Reset
+    </button>
+  </div>
+</div>
+
+<div class="container" id="app"></div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+var DEFAULT_DATA = {
+  services: [
+    { icon: 'phone', name: 'Troca de Tela', desc: 'Substituição de display com peças originais e de alta qualidade. Samsung, Apple, Xiaomi e mais.', price: 'A partir de R$ 89' },
+    { icon: 'battery', name: 'Troca de Bateria', desc: 'Baterias originais com garantia. Seu celular com autonomia de novo.', price: 'A partir de R$ 69' },
+    { icon: 'circuit', name: 'Reparo em Placa', desc: 'Solda BGA, trilhas rompidas, componentes queimados. Temos equipamento de microscopia.', price: 'Sob análise' },
+    { icon: 'water', name: 'Limpeza de Umidade', desc: 'Celular molhou? Fazemos limpeza ultrassônica e recuperação de placa.', price: 'A partir de R$ 79' },
+    { icon: 'speaker', name: 'Conectores e Áudio', desc: 'Carregador, fone, microfone, alto-falante — troca e reparo de conectores.', price: 'A partir de R$ 49' },
+    { icon: 'phone-code', name: 'Software & Desbloqueio', desc: 'Formatação, atualização, remoção de conta Google/iCloud e muito mais.', price: 'A partir de R$ 59' }
+  ],
+  scooters: [
+    { name: 'Scooter Elétrica XRT-500', tag: 'Mais vendida', specs: ['bolt', 'battery', 'speed', 'ruler'], specLabels: ['500W', '48V', '35 km/h', '40 km'], desc: 'Ideal para o dia a dia. Leve, silenciosa e econômica. Bateria removível.', price: 'R$ 3.499', image: '', bg: 'linear-gradient(135deg, #1a1a1a, #333)' },
+    { name: 'Scooter Esportiva RR-800', tag: 'Nova', specs: ['bolt', 'battery', 'speed', 'ruler'], specLabels: ['800W', '60V', '45 km/h', '55 km'], desc: 'Mais potência para encarar subidas e terrenos irregulares. Suspensão reforçada.', price: 'R$ 4.999', image: '', bg: 'linear-gradient(135deg, #CC0000, #FF1A1A)' },
+    { name: 'Scooter Urbana Eco-350', tag: 'Econômica', specs: ['bolt', 'battery', 'speed', 'ruler'], specLabels: ['350W', '36V', '25 km/h', '30 km'], desc: 'Perfeita para trajetos curtos. Leve e fácil de carregar. Ideal para estudantes.', price: 'R$ 2.299', image: '', bg: 'linear-gradient(135deg, #2d2d2d, #555)' }
+  ],
+  feedbacks: [
+    { name: 'Ana M.', initials: 'AM', text: '"Troquei a tela do meu iPhone aqui e ficou perfeito! Atendimento nota 10, super recomendo."' },
+    { name: 'Carlos L.', initials: 'CL', text: '"Meu celular caiu na água e eles recuperaram. Rápido e com preço justo. Virei cliente pra sempre."' },
+    { name: 'Marcos R.', initials: 'MR', text: '"Comprei uma scooter com eles e o atendimento foi incrível. Explicaram tudo, funcionando perfeitamente!"' }
+  ],
+  heroList: ['Troca de tela', 'Troca de bateria', 'Reparo em placa', 'Software', 'Venda de scooters'],
+  aboutYears: 'Há mais de 10 anos',
+  aboutTagline: 'cuidando do seu celular',
+  aboutTitle: 'Assistência técnica que impressiona',
+  aboutText1: 'A RR Celulares nasceu da paixão por tecnologia e do desejo de oferecer um serviço de excelência em Balneário Camboriú. Com mais de uma década de experiência, já atendemos milhares de clientes com qualidade e transparência.',
+  aboutText2: 'Além de assistência técnica especializada, também trabalhamos com venda de scooters — mobilidade urbana com qualidade e procedência.',
+  businessHours: 'Seg-Sex: 08h às 18h | Sáb: 08h às 12h',
+  mapAddress: 'Rua Maria Manzoto, 54',
+  mapCity: 'Balneário Camboriú - SC',
+  mapRegion: 'São Judas — Próximo ao centro'
+};
+
+var data = {};
+
+function loadData() {
+  try {
+    var saved = localStorage.getItem('rr_data');
+    if (saved) {
+      data = JSON.parse(saved);
+      for (var key in DEFAULT_DATA) {
+        if (!data[key]) data[key] = JSON.parse(JSON.stringify(DEFAULT_DATA[key]));
+      }
+    } else {
+      data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    }
+  } catch(e) {
+    data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+  }
+}
+
+function saveData() {
+  localStorage.setItem('rr_data', JSON.stringify(data));
+}
+
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type + ' show';
+  clearTimeout(t._hide);
+  t._hide = setTimeout(function() { t.classList.remove('show'); }, 2500);
+}
+
+function saveAll() {
+  saveData();
+  showToast('Dados salvos com sucesso!', 'success');
+}
+
+function resetAll() {
+  if (!confirm('Tem certeza? Isso vai apagar todas as alterações e restaurar os dados padrão.')) return;
+  data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+  saveData();
+  render();
+  showToast('Dados restaurados ao padrão', 'error');
+}
+
+function iconSvg(name, cls) {
+  return '<svg class="icon ' + (cls || 'icon-sm') + '"><use href="#icon-' + name + '"/></svg>';
+}
+
+function escHtml(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// === SERVICES ===
+function addService() {
+  data.services.push({ icon: 'phone', name: 'Novo Serviço', desc: 'Descrição do serviço', price: 'R$ 0' });
+  render();
+}
+
+function removeService(i) {
+  data.services.splice(i, 1);
+  render();
+}
+
+function moveService(i, dir) {
+  var t = data.services[i + dir];
+  if (!t) return;
+  data.services[i + dir] = data.services[i];
+  data.services[i] = t;
+  render();
+}
+
+// === SCOOTERS ===
+function addScooter() {
+  data.scooters.push({ name: 'Nova Scooter', tag: '', specs: ['bolt'], specLabels: ['500W'], desc: 'Descrição', price: 'R$ 0', image: '', bg: 'linear-gradient(135deg, #1a1a1a, #333)' });
+  render();
+}
+
+function removeScooter(i) {
+  data.scooters.splice(i, 1);
+  render();
+}
+
+function moveScooter(i, dir) {
+  var t = data.scooters[i + dir];
+  if (!t) return;
+  data.scooters[i + dir] = data.scooters[i];
+  data.scooters[i] = t;
+  render();
+}
+
+function addSpec(scooterIdx) {
+  var label = prompt('Texto do spec (ex: 500W):');
+  if (label) {
+    data.scooters[scooterIdx].specLabels.push(label);
+    if (!data.scooters[scooterIdx].specs) data.scooters[scooterIdx].specs = [];
+    data.scooters[scooterIdx].specs.push('bolt');
+    render();
+  }
+}
+
+function removeSpec(scooterIdx, specIdx) {
+  data.scooters[scooterIdx].specs.splice(specIdx, 1);
+  data.scooters[scooterIdx].specLabels.splice(specIdx, 1);
+  render();
+}
+
+function handleImageUpload(scooterIdx, file) {
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    data.scooters[scooterIdx].image = e.target.result;
+    render();
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeImage(scooterIdx) {
+  data.scooters[scooterIdx].image = '';
+  render();
+}
+
+// === FEEDBACKS ===
+function addFeedback() {
+  data.feedbacks.push({ name: 'Cliente', initials: 'CL', text: '"Ótimo serviço!"' });
+  render();
+}
+
+function removeFeedback(i) {
+  data.feedbacks.splice(i, 1);
+  render();
+}
+
+// === HERO LIST ===
+function addHeroItem() {
+  var item = prompt('Item da lista do hero (ex: Troca de tela):');
+  if (item) { data.heroList.push(item); render(); }
+}
+
+function removeHeroItem(i) {
+  data.heroList.splice(i, 1);
+  render();
+}
+
+// === RENDER ===
+function render() {
+  var app = document.getElementById('app');
+  var h = '';
+
+  // === HERO LIST ===
+  h += '<div class="section-card">';
+  h += '<h2>' + iconSvg('list', 'icon-md') + ' Lista do Hero <span class="badge">' + data.heroList.length + ' itens</span></h2>';
+  h += '<div class="section-body">';
+  data.heroList.forEach(function(item, i) {
+    h += '<div class="item-card">';
+    h += '<div style="display:flex;align-items:center;gap:10px;">';
+    h += '<input value="' + escHtml(item) + '" onchange="data.heroList[' + i + ']=this.value" style="flex:1;">';
+    h += '<button class="btn-icon delete" onclick="removeHeroItem(' + i + ')">' + iconSvg('x') + '</button>';
+    h += '</div></div>';
+  });
+  h += '<button class="btn-add" onclick="addHeroItem()">' + iconSvg('plus') + ' Adicionar item</button>';
+  h += '</div></div>';
+
+  // === ABOUT ===
+  h += '<div class="section-card">';
+  h += '<h2>' + iconSvg('edit', 'icon-md') + ' Sobre</h2>';
+  h += '<div class="section-body">';
+  h += '<div class="form-grid">';
+  h += field('aboutYears', 'Anos (negrito)', data.aboutYears);
+  h += field('aboutTagline', 'Tagline (abaixo dos anos)', data.aboutTagline);
+  h += '</div>';
+  h += field('aboutTitle', 'Título', data.aboutTitle);
+  h += field('aboutText1', 'Texto 1', data.aboutText1, 'textarea');
+  h += field('aboutText2', 'Texto 2', data.aboutText2, 'textarea');
+  h += '</div></div>';
+
+  // === CONTACT ===
+  h += '<div class="section-card">';
+  h += '<h2>' + iconSvg('pin', 'icon-md') + ' Contato</h2>';
+  h += '<div class="section-body">';
+  h += field('businessHours', 'Horário de funcionamento', data.businessHours);
+  h += field('mapAddress', 'Endereço (destaque)', data.mapAddress);
+  h += field('mapCity', 'Cidade', data.mapCity);
+  h += field('mapRegion', 'Região', data.mapRegion);
+  h += '</div></div>';
+
+  // === SERVICES ===
+  h += '<div class="section-card">';
+  h += '<h2>' + iconSvg('phone', 'icon-md') + ' Serviços de Celular <span class="badge">' + data.services.length + ' itens</span></h2>';
+  h += '<div class="section-body">';
+  data.services.forEach(function(s, i) {
+    h += '<div class="item-card">';
+    h += '<div class="item-card-header">';
+    h += '<div class="title">#' + (i+1) + ' — ' + escHtml(s.name) + '</div>';
+    h += '<div class="actions">';
+    if (i > 0) h += '<button class="btn-icon move" onclick="moveService(' + i + ',-1)">' + iconSvg('up') + '</button>';
+    if (i < data.services.length-1) h += '<button class="btn-icon move" onclick="moveService(' + i + ',1)">' + iconSvg('down') + '</button>';
+    h += '<button class="btn-icon delete" onclick="removeService(' + i + ')">' + iconSvg('x') + '</button>';
+    h += '</div></div>';
+    h += '<div class="form-row">';
+    h += '<div class="field"><label>Ícone SVG</label><input value="' + escHtml(s.icon) + '" onchange="data.services[' + i + '].icon=this.value"></div>';
+    h += '<div class="field"><label>Nome</label><input value="' + escHtml(s.name) + '" onchange="data.services[' + i + '].name=this.value"></div>';
+    h += '</div>';
+    h += '<div class="field"><label>Descrição</label><textarea rows="2" onchange="data.services[' + i + '].desc=this.value">' + escHtml(s.desc) + '</textarea></div>';
+    h += '<div class="field"><label>Preço</label><input value="' + escHtml(s.price) + '" onchange="data.services[' + i + '].price=this.value"></div>';
+    h += '</div>';
+  });
+  h += '<button class="btn-add" onclick="addService()">' + iconSvg('plus') + ' Adicionar serviço</button>';
+  h += '</div></div>';
+
+  // === SCOOTERS ===
+  h += '<div class="section-card">';
+  h += '<h2>' + iconSvg('scooter', 'icon-md') + ' Scooters <span class="badge">' + data.scooters.length + ' itens</span></h2>';
+  h += '<div class="section-body">';
+  data.scooters.forEach(function(s, i) {
+    h += '<div class="item-card">';
+    h += '<div class="item-card-header">';
+    h += '<div class="title">#' + (i+1) + ' — ' + escHtml(s.name) + '</div>';
+    h += '<div class="actions">';
+    if (i > 0) h += '<button class="btn-icon move" onclick="moveScooter(' + i + ',-1)">' + iconSvg('up') + '</button>';
+    if (i < data.scooters.length-1) h += '<button class="btn-icon move" onclick="moveScooter(' + i + ',1)">' + iconSvg('down') + '</button>';
+    h += '<button class="btn-icon delete" onclick="removeScooter(' + i + ')">' + iconSvg('x') + '</button>';
+    h += '</div></div>';
+    h += '<div class="form-row">';
+    h += '<div class="field"><label>Nome</label><input value="' + escHtml(s.name) + '" onchange="data.scooters[' + i + '].name=this.value"></div>';
+    h += '<div class="field"><label>Tag</label><input value="' + escHtml(s.tag || '') + '" onchange="data.scooters[' + i + '].tag=this.value" placeholder="Ex: Mais vendida"></div>';
+    h += '</div>';
+    h += '<div class="field"><label>Cor de fundo (CSS gradient)</label><input value="' + escHtml(s.bg || '') + '" onchange="data.scooters[' + i + '].bg=this.value" placeholder="linear-gradient(...)"></div>';
+    h += '<div class="field"><label>Descrição</label><textarea rows="2" onchange="data.scooters[' + i + '].desc=this.value">' + escHtml(s.desc) + '</textarea></div>';
+    h += '<div class="field"><label>Preço</label><input value="' + escHtml(s.price) + '" onchange="data.scooters[' + i + '].price=this.value"></div>';
+
+    // Specs
+    h += '<div class="field"><label>Especificações</label><div class="specs-grid">';
+    if (s.specLabels) {
+      s.specLabels.forEach(function(label, si) {
+        h += '<div class="spec-tag">' + escHtml(label) + ' <span class="remove-spec" onclick="removeSpec(' + i + ',' + si + ')">' + iconSvg('x', 'icon-sm') + '</span></div>';
+      });
+    }
+    h += '</div><button class="btn-add" style="padding:8px;" onclick="addSpec(' + i + ')">' + iconSvg('plus') + ' Adicionar spec</button></div>';
+
+    // Image
+    h += '<div class="field"><label>Foto</label><div class="img-upload">';
+    h += '<label class="upload-btn">' + iconSvg('image') + ' Escolher foto <input type="file" accept="image/*" onchange="handleImageUpload(' + i + ',this.files[0])"></label>';
+    h += '<div class="img-preview">';
+    if (s.image) {
+      h += '<img src="' + s.image + '" alt=""><br></div>';
+      h += '<span class="img-remove" onclick="removeImage(' + i + ')">Remover foto</span>';
+    } else {
+      h += '<span class="no-img">Sem foto</span></div>';
+    }
+    h += '</div></div>';
+    h += '</div>';
+  });
+  h += '<button class="btn-add" onclick="addScooter()">' + iconSvg('plus') + ' Adicionar scooter</button>';
+  h += '</div></div>';
+
+  // === FEEDBACKS ===
+  h += '<div class="section-card">';
+  h += '<h2>' + iconSvg('star', 'icon-md') + ' Feedbacks <span class="badge">' + data.feedbacks.length + ' itens</span></h2>';
+  h += '<div class="section-body">';
+  data.feedbacks.forEach(function(f, i) {
+    h += '<div class="item-card">';
+    h += '<div class="item-card-header">';
+    h += '<div class="title">#' + (i+1) + ' — ' + escHtml(f.name) + '</div>';
+    h += '<div class="actions"><button class="btn-icon delete" onclick="removeFeedback(' + i + ')">' + iconSvg('x') + '</button></div>';
+    h += '</div>';
+    h += '<div class="form-row">';
+    h += '<div class="field"><label>Nome</label><input value="' + escHtml(f.name) + '" onchange="data.feedbacks[' + i + '].name=this.value"></div>';
+    h += '<div class="field"><label>Iniciais (avatar)</label><input value="' + escHtml(f.initials) + '" onchange="data.feedbacks[' + i + '].initials=this.value" maxlength="3"></div>';
+    h += '</div>';
+    h += '<div class="field"><label>Depoimento</label><textarea rows="2" onchange="data.feedbacks[' + i + '].text=this.value">' + escHtml(f.text) + '</textarea></div>';
+    h += '</div>';
+  });
+  h += '<button class="btn-add" onclick="addFeedback()">' + iconSvg('plus') + ' Adicionar feedback</button>';
+  h += '</div></div>';
+
+  app.innerHTML = h;
+}
+
+function field(key, label, val, type) {
+  type = type || 'input';
+  var tag = type === 'textarea'
+    ? '<textarea rows="2" onchange="data[\'' + key + '\']=this.value">' + escHtml(val) + '</textarea>'
+    : '<input value="' + escHtml(val) + '" onchange="data[\'' + key + '\']=this.value">';
+  return '<div class="field"><label>' + label + '</label>' + tag + '</div>';
+}
+
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    saveAll();
+  }
+});
+
+loadData();
+render();
+</script>
+</body>
+</html>
