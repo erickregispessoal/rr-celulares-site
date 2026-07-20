@@ -1010,7 +1010,7 @@ footer strong { color: rgba(255,255,255,0.8); }
 .iphone-3d-wrapper {
   width: 220px;
   height: 440px;
-  perspective: 1200px;
+  perspective: 800px;
   position: relative;
   cursor: default;
 }
@@ -1021,7 +1021,7 @@ footer strong { color: rgba(255,255,255,0.8); }
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.1s ease;
-  transform: rotateY(-28deg) rotateX(15deg);
+  transform: rotateY(-32deg) rotateX(18deg);
 }
 
 .iphone-layer {
@@ -1465,20 +1465,20 @@ footer strong { color: rgba(255,255,255,0.8); }
 }
 
 /* Exploded state as default (always visible) */
-.layer-back { transform: translateZ(-60px); box-shadow: 0 0 30px rgba(204,0,0,0.15); }
-.layer-battery { transform: translateZ(15px); }
-.layer-logic { transform: translateZ(70px); }
-.layer-midframe { transform: translateZ(125px); }
-.layer-display { transform: translateZ(180px); }
-.layer-glass { transform: translateZ(235px); box-shadow: 0 0 40px rgba(255,255,255,0.05); }
+.layer-back { transform: translateZ(-120px); box-shadow: 0 0 30px rgba(204,0,0,0.15); }
+.layer-battery { transform: translateZ(40px); }
+.layer-logic { transform: translateZ(180px); }
+.layer-midframe { transform: translateZ(320px); }
+.layer-display { transform: translateZ(460px); }
+.layer-glass { transform: translateZ(600px); box-shadow: 0 0 40px rgba(255,255,255,0.05); }
 
 /* On hover: subtle extra separation + glow */
-.iphone-3d-wrapper:hover .layer-back { transform: translateZ(-75px); box-shadow: 0 0 50px rgba(204,0,0,0.3); }
-.iphone-3d-wrapper:hover .layer-battery { transform: translateZ(30px); }
-.iphone-3d-wrapper:hover .layer-logic { transform: translateZ(90px); }
-.iphone-3d-wrapper:hover .layer-midframe { transform: translateZ(150px); }
-.iphone-3d-wrapper:hover .layer-display { transform: translateZ(210px); }
-.iphone-3d-wrapper:hover .layer-glass { transform: translateZ(270px); }
+.iphone-3d-wrapper:hover .layer-back { transform: translateZ(-140px); box-shadow: 0 0 50px rgba(204,0,0,0.3); }
+.iphone-3d-wrapper:hover .layer-battery { transform: translateZ(60px); }
+.iphone-3d-wrapper:hover .layer-logic { transform: translateZ(210px); }
+.iphone-3d-wrapper:hover .layer-midframe { transform: translateZ(360px); }
+.iphone-3d-wrapper:hover .layer-display { transform: translateZ(510px); }
+.iphone-3d-wrapper:hover .layer-glass { transform: translateZ(660px); }
 
 /* Tags visible by default */
 .layer-tag {
