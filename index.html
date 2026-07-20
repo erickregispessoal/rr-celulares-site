@@ -1005,6 +1005,318 @@ footer strong { color: rgba(255,255,255,0.8); }
   height: 350px;
   background: radial-gradient(circle, rgba(255,26,26,0.06) 0%, transparent 70%);
 }
+
+/* ===== 3D IPHONE ===== */
+.iphone-3d-wrapper {
+  width: 220px;
+  height: 440px;
+  perspective: 1200px;
+  position: relative;
+  cursor: default;
+}
+
+.iphone-3d-scene {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease;
+}
+
+.iphone-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 32px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s ease;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.layer-inner {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.layer-tag {
+  position: absolute;
+  right: -90px;
+  top: 50%;
+  transform: translateY(-50%) translateZ(0);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.layer-tag::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 50%;
+  width: 16px;
+  height: 1px;
+  background: rgba(255,255,255,0.2);
+}
+
+.iphone-3d-wrapper:hover .layer-tag {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* --- Layer specific styles --- */
+.layer-back .layer-inner {
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a, #1a1a1a);
+  border: 1px solid #333;
+}
+.layer-back .apple-logo {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 38px;
+  background: rgba(255,255,255,0.08);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+.layer-back .camera-module {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid #333;
+}
+
+.layer-battery .layer-inner {
+  background: linear-gradient(180deg, #1a1a1a, #0d0d0d);
+  border: 1px solid #2a2a2a;
+}
+.layer-battery .battery-cell {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 160px;
+  background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
+  border-radius: 12px;
+  border: 1px solid #333;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+.layer-battery .battery-cell::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 100px;
+  background: linear-gradient(180deg, #25D366, #1a9e4a);
+  border-radius: 4px;
+  opacity: 0.4;
+}
+.layer-battery .battery-connector {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 8px;
+  background: #444;
+  border-radius: 2px;
+}
+
+.layer-logic .layer-inner {
+  background: linear-gradient(135deg, #0a1a0a, #0d0d0d, #0a1a0a);
+  border: 1px solid #2a2a2a;
+}
+.layer-logic .chip {
+  position: absolute;
+  border-radius: 2px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+}
+.layer-logic .chip-a { top: 30px; left: 50%; transform: translateX(-50%); width: 60px; height: 80px; }
+.layer-logic .chip-a::after {
+  content: 'A16';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.5rem;
+  color: #666;
+  font-weight: 700;
+}
+.layer-logic .chip-b { top: 130px; left: 20px; width: 40px; height: 50px; }
+.layer-logic .chip-c { top: 130px; right: 20px; width: 40px; height: 50px; }
+.layer-logic .chip-d { top: 200px; left: 50%; transform: translateX(-50%); width: 100px; height: 30px; }
+.layer-logic .chip-d::after {
+  content: '●●●●';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.3rem;
+  color: #555;
+  letter-spacing: 4px;
+}
+
+.layer-midframe .layer-inner {
+  background: linear-gradient(180deg, #2a2a2a, #1a1a1a, #2a2a2a);
+  border: 1px solid #444;
+}
+.layer-midframe .screw {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #555;
+  border: 1px solid #666;
+}
+.layer-midframe .screw-1 { top: 16px; left: 20px; }
+.layer-midframe .screw-2 { top: 16px; right: 20px; }
+.layer-midframe .screw-3 { bottom: 16px; left: 20px; }
+.layer-midframe .screw-4 { bottom: 16px; right: 20px; }
+.layer-midframe .wire {
+  position: absolute;
+  height: 2px;
+  background: #c44;
+  border-radius: 1px;
+}
+.layer-midframe .wire-1 { top: 60px; left: 10px; right: 40px; }
+.layer-midframe .wire-2 { top: 180px; left: 30px; right: 10px; background: #48f; }
+
+.layer-display .layer-inner {
+  background: #000;
+  border: 1px solid #222;
+}
+.layer-display .display-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 24px;
+  background: #000;
+  border-radius: 0 0 12px 12px;
+  border: 1px solid #1a1a1a;
+  border-top: none;
+}
+.layer-display .display-notch::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #222;
+}
+.layer-display .display-content {
+  position: absolute;
+  top: 50px;
+  left: 24px;
+  right: 24px;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+}
+.layer-display .display-bar {
+  width: 80%;
+  height: 6px;
+  background: linear-gradient(90deg, #1a1a1a, #2a2a2a, #1a1a1a);
+  border-radius: 3px;
+}
+.layer-display .display-bar-short { width: 50%; }
+
+.layer-glass .layer-inner {
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02), rgba(255,255,255,0.06));
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.glass-shine::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.03) 45%, transparent 50%);
+  animation: glass-shine 6s ease-in-out infinite;
+}
+@keyframes glass-shine {
+  0%, 100% { transform: translateX(-30%) translateY(-30%); }
+  50% { transform: translateX(30%) translateY(30%); }
+}
+
+/* Exploded state on hover */
+.iphone-3d-wrapper:hover .layer-back { transform: translateZ(-40px); box-shadow: 0 0 30px rgba(204,0,0,0.15); }
+.iphone-3d-wrapper:hover .layer-battery { transform: translateZ(10px); }
+.iphone-3d-wrapper:hover .layer-logic { transform: translateZ(50px); }
+.iphone-3d-wrapper:hover .layer-midframe { transform: translateZ(90px); }
+.iphone-3d-wrapper:hover .layer-display { transform: translateZ(130px); }
+.iphone-3d-wrapper:hover .layer-glass { transform: translateZ(170px); box-shadow: 0 0 40px rgba(255,255,255,0.05); }
+
+/* Hint text */
+.iphone-3d-hint {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.iphone-3d-wrapper:hover .iphone-3d-hint { opacity: 1; }
+
+/* Hero badge for the service list */
+.hero-badge {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .iphone-3d-wrapper { display: none; }
+  .hero-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 10px 20px;
+    background: rgba(204,0,0,0.1);
+    border: 1px solid rgba(204,0,0,0.2);
+    border-radius: 10px;
+    color: var(--accent2);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+}
 </style>
 </head>
 <body>
@@ -1148,6 +1460,15 @@ footer strong { color: rgba(255,255,255,0.8); }
       <line x1="10" y1="8" x2="12" y2="10"/>
       <line x1="7" y1="11" x2="9" y2="13"/>
     </symbol>
+    <!-- Move / Hand -->
+    <symbol id="icon-move" viewBox="0 0 24 24">
+      <polyline points="5 9 2 12 5 15"/>
+      <polyline points="9 5 12 2 15 5"/>
+      <polyline points="15 19 12 22 9 19"/>
+      <polyline points="19 9 22 12 19 15"/>
+      <line x1="2" y1="12" x2="22" y2="12"/>
+      <line x1="12" y1="2" x2="12" y2="22"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -1201,19 +1522,66 @@ footer strong { color: rgba(255,255,255,0.8); }
       </div>
     </div>
     <div class="hero-visual" data-reveal="right">
-      <div class="hero-card" data-tilt>
-        <div class="icon-big tilt-float">
-          <svg class="icon icon-float-3d"><use href="#icon-phone"/></svg>
+      <div class="iphone-3d-wrapper">
+        <div class="iphone-3d-scene" id="iphoneScene">
+          <div class="iphone-layer layer-back" data-depth="0">
+            <div class="layer-inner">
+              <div class="apple-logo"></div>
+              <div class="camera-module"></div>
+            </div>
+            <div class="layer-tag">Carcaça</div>
+          </div>
+          <div class="iphone-layer layer-battery" data-depth="1">
+            <div class="layer-inner">
+              <div class="battery-cell"></div>
+              <div class="battery-connector"></div>
+            </div>
+            <div class="layer-tag">Bateria</div>
+          </div>
+          <div class="iphone-layer layer-logic" data-depth="2">
+            <div class="layer-inner">
+              <div class="chip chip-a"></div>
+              <div class="chip chip-b"></div>
+              <div class="chip chip-c"></div>
+              <div class="chip chip-d"></div>
+            </div>
+            <div class="layer-tag">Placa Lógica</div>
+          </div>
+          <div class="iphone-layer layer-midframe" data-depth="3">
+            <div class="layer-inner">
+              <div class="screw screw-1"></div>
+              <div class="screw screw-2"></div>
+              <div class="screw screw-3"></div>
+              <div class="screw screw-4"></div>
+              <div class="wire wire-1"></div>
+              <div class="wire wire-2"></div>
+            </div>
+            <div class="layer-tag">Estrutura</div>
+          </div>
+          <div class="iphone-layer layer-display" data-depth="4">
+            <div class="layer-inner">
+              <div class="display-notch"></div>
+              <div class="display-content">
+                <div class="display-bar"></div>
+                <div class="display-bar"></div>
+                <div class="display-bar"></div>
+                <div class="display-bar display-bar-short"></div>
+              </div>
+            </div>
+            <div class="layer-tag">Display</div>
+          </div>
+          <div class="iphone-layer layer-glass" data-depth="5">
+            <div class="layer-inner glass-shine"></div>
+            <div class="layer-tag">Vidro</div>
+          </div>
         </div>
-        <h3 class="tilt-content">Diagnóstico Gratuito</h3>
-        <div class="sub tilt-content">Sem compromisso</div>
-        <ul class="service-list" id="heroServiceList">
-          <li><svg class="icon icon-sm"><use href="#icon-check"/></svg> Troca de tela</li>
-          <li><svg class="icon icon-sm"><use href="#icon-check"/></svg> Troca de bateria</li>
-          <li><svg class="icon icon-sm"><use href="#icon-check"/></svg> Reparo em placa</li>
-          <li><svg class="icon icon-sm"><use href="#icon-check"/></svg> Software</li>
-          <li><svg class="icon icon-sm"><use href="#icon-check"/></svg> Venda de scooters</li>
-        </ul>
+        <div class="iphone-3d-hint">
+          <svg class="icon icon-sm"><use href="#icon-move"/></svg> Passe o mouse para explodir
+        </div>
+      </div>
+      <div class="hero-badge">
+        <svg class="icon icon-sm" style="color:var(--accent2);"><use href="#icon-check"/></svg>
+        Diagnóstico gratuito
       </div>
     </div>
   </div>
@@ -1473,14 +1841,6 @@ function starsHtml() {
 function render() {
   var data = getData();
 
-  // Hero list
-  var heroEl = document.getElementById('heroServiceList');
-  if (data.heroList && heroEl) {
-    heroEl.innerHTML = data.heroList.map(function(item) {
-      return '<li class="tilt-content">' + iconSvg('check', 'icon-sm') + ' ' + escHtml(item) + '</li>';
-    }).join('');
-  }
-
   // About
   if (document.getElementById('aboutYears')) document.getElementById('aboutYears').textContent = data.aboutYears;
   if (document.getElementById('aboutTagline')) document.getElementById('aboutTagline').textContent = data.aboutTagline;
@@ -1737,11 +2097,53 @@ function initHero3D() {
   });
 }
 
+// --- iPhone 3D Mouse Tracking ---
+function initIPhone3D() {
+  var wrapper = document.querySelector('.iphone-3d-wrapper');
+  var scene = document.getElementById('iphoneScene');
+  if (!wrapper || !scene) return;
+
+  var layers = scene.querySelectorAll('.iphone-layer');
+  var baseTransforms = [];
+  layers.forEach(function(l) {
+    baseTransforms.push(l.style.transform || '');
+  });
+
+  wrapper.addEventListener('mousemove', function(e) {
+    var rect = wrapper.getBoundingClientRect();
+    var x = (e.clientX - rect.left) / rect.width - 0.5;
+    var y = (e.clientY - rect.top) / rect.height - 0.5;
+
+    var rotateY = x * 12;
+    var rotateX = y * -12;
+
+    scene.style.transform = 'rotateY(' + rotateY + 'deg) rotateX(' + rotateX + 'deg)';
+
+    var isHover = true;
+    layers.forEach(function(layer, i) {
+      var depth = parseFloat(layer.dataset.depth) || 0;
+      var layerRotateY = x * (4 + depth * 0.5);
+      var layerRotateX = y * (-4 - depth * 0.5);
+      var zOffset = isHover ? depth * 42 : 0;
+      var extraZ = (1 - Math.abs(x)) * depth * 6;
+      layer.style.transform = 'translateZ(' + (zOffset + extraZ) + 'px) rotateY(' + layerRotateY + 'deg) rotateX(' + layerRotateX + 'deg)';
+    });
+  });
+
+  wrapper.addEventListener('mouseleave', function() {
+    scene.style.transform = '';
+    layers.forEach(function(layer) {
+      layer.style.transform = '';
+    });
+  });
+}
+
 // --- Init all 3D animations ---
 function init3D() {
   initParticles();
   initParallax();
   initScrollReveal();
+  initIPhone3D();
   // Tilt and hero3d need to run after dynamic content is rendered
   setTimeout(function() {
     initTilt();
