@@ -865,6 +865,146 @@ footer strong { color: rgba(255,255,255,0.8); }
   .hero-btns { flex-direction: column; }
   .hero-btns .btn { justify-content: center; }
 }
+
+/* ===== 3D ANIMATIONS ===== */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(40px) perspective(600px) rotateX(3deg);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+[data-reveal].visible {
+  opacity: 1;
+  transform: translateY(0) perspective(600px) rotateX(0);
+}
+[data-reveal="left"] {
+  transform: translateX(-50px) perspective(600px) rotateY(5deg);
+}
+[data-reveal="left"].visible {
+  transform: translateX(0) perspective(600px) rotateY(0);
+}
+[data-reveal="right"] {
+  transform: translateX(50px) perspective(600px) rotateY(-5deg);
+}
+[data-reveal="right"].visible {
+  transform: translateX(0) perspective(600px) rotateY(0);
+}
+[data-reveal="scale"] {
+  transform: perspective(600px) scale(0.85) translateZ(-30px);
+}
+[data-reveal="scale"].visible {
+  transform: perspective(600px) scale(1) translateZ(0);
+}
+
+[data-tilt] {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+[data-tilt] .tilt-content {
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+[data-tilt] .tilt-float {
+  transform: translateZ(20px);
+  transition: transform 0.3s ease;
+}
+
+[data-tilt]:hover .tilt-float {
+  transform: translateZ(40px);
+}
+
+[data-tilt] .tilt-float-sm {
+  transform: translateZ(10px);
+  transition: transform 0.3s ease;
+}
+
+[data-tilt]:hover .tilt-float-sm {
+  transform: translateZ(25px);
+}
+
+/* Floating 3D animation for icons */
+@keyframes float-3d {
+  0%, 100% { transform: translateY(0) perspective(400px) rotateX(0deg) rotateY(0deg); }
+  25% { transform: translateY(-8px) perspective(400px) rotateX(2deg) rotateY(-2deg); }
+  50% { transform: translateY(-4px) perspective(400px) rotateX(-1deg) rotateY(3deg); }
+  75% { transform: translateY(-10px) perspective(400px) rotateX(1deg) rotateY(-1deg); }
+}
+.icon-float-3d {
+  animation: float-3d 4s ease-in-out infinite;
+}
+
+/* 3D glow particles */
+.hero-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 26, 26, 0.4);
+  border-radius: 50%;
+  animation: particle-float linear infinite;
+  box-shadow: 0 0 12px rgba(255, 26, 26, 0.2);
+}
+@keyframes particle-float {
+  0% { transform: translateY(100vh) translateZ(0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) translateZ(50px) scale(0.3); opacity: 0; }
+}
+
+/* 3D stat counter animation */
+.stat-item .num {
+  display: inline-block;
+}
+.stat-item .num.animate {
+  animation: stat-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes stat-pop {
+  0% { transform: perspective(400px) scale(1) translateZ(0); }
+  50% { transform: perspective(400px) scale(1.2) translateZ(20px); }
+  100% { transform: perspective(400px) scale(1) translateZ(0); }
+}
+
+/* 3D hover glow on cards */
+.service-card, .scooter-card, .diff-card, .feedback-card {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.service-card:hover, .scooter-card:hover, .diff-card:hover, .feedback-card:hover {
+  transform: translateY(-6px) perspective(600px) rotateX(1deg);
+}
+
+/* 3D parallax hero glow */
+.hero-glow-1, .hero-glow-2 {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+.hero-glow-1 {
+  top: 10%;
+  right: 5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(204,0,0,0.08) 0%, transparent 70%);
+}
+.hero-glow-2 {
+  bottom: 5%;
+  left: 5%;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(255,26,26,0.06) 0%, transparent 70%);
+}
 </style>
 </head>
 <body>
@@ -1033,8 +1173,10 @@ footer strong { color: rgba(255,255,255,0.8); }
 </header>
 
 <section class="hero">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
   <div class="container">
-    <div class="hero-content">
+    <div class="hero-content" data-reveal="left">
       <h1>Assistência Técnica de <span>Qualidade que Impressiona</span></h1>
       <p>Há mais de 10 anos cuidando do seu celular com peças originais, serviço rápido e garantia. Também vendemos scooters!</p>
       <div class="hero-btns">
@@ -1045,26 +1187,26 @@ footer strong { color: rgba(255,255,255,0.8); }
       </div>
       <div class="hero-stats">
         <div class="stat-item">
-          <div class="num">10+</div>
+          <div class="num" data-count>10+</div>
           <div class="label">Anos de experiência</div>
         </div>
         <div class="stat-item">
-          <div class="num">5K+</div>
+          <div class="num" data-count>5K+</div>
           <div class="label">Clientes atendidos</div>
         </div>
         <div class="stat-item">
-          <div class="num">98%</div>
+          <div class="num" data-count>98%</div>
           <div class="label">Satisfação</div>
         </div>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="hero-card">
-        <div class="icon-big">
-          <svg class="icon"><use href="#icon-phone"/></svg>
+    <div class="hero-visual" data-reveal="right">
+      <div class="hero-card" data-tilt>
+        <div class="icon-big tilt-float">
+          <svg class="icon icon-float-3d"><use href="#icon-phone"/></svg>
         </div>
-        <h3>Diagnóstico Gratuito</h3>
-        <div class="sub">Sem compromisso</div>
+        <h3 class="tilt-content">Diagnóstico Gratuito</h3>
+        <div class="sub tilt-content">Sem compromisso</div>
         <ul class="service-list" id="heroServiceList">
           <li><svg class="icon icon-sm"><use href="#icon-check"/></svg> Troca de tela</li>
           <li><svg class="icon icon-sm"><use href="#icon-check"/></svg> Troca de bateria</li>
@@ -1079,35 +1221,35 @@ footer strong { color: rgba(255,255,255,0.8); }
 
 <section id="sobre" class="section">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" data-reveal>
       <h2>Sobre a <span>RR Celulares</span></h2>
       <p>Conheça nossa história e por que somos referência em Balneário Camboriú</p>
     </div>
     <div class="about-grid">
-      <div class="about-image">
+      <div class="about-image" data-reveal="left">
         <div class="badge">
           <strong id="aboutYears">Há mais de 10 anos</strong>
           <span id="aboutTagline">cuidando do seu celular</span>
         </div>
       </div>
-      <div class="about-text">
+      <div class="about-text" data-reveal="right">
         <h3 id="aboutTitle">Assistência técnica que impressiona</h3>
         <p id="aboutText1">A RR Celulares nasceu da paixão por tecnologia e do desejo de oferecer um serviço de excelência em Balneário Camboriú. Com mais de uma década de experiência, já atendemos milhares de clientes com qualidade e transparência.</p>
         <p id="aboutText2">Além de assistência técnica especializada, também trabalhamos com venda de scooters — mobilidade urbana com qualidade e procedência.</p>
         <div class="about-features" id="aboutFeatures">
-          <div class="about-feature">
+          <div class="about-feature" data-reveal="left">
             <div class="icon-fill"><svg class="icon"><use href="#icon-wrench"/></svg></div>
             <span>Profissionais certificados</span>
           </div>
-          <div class="about-feature">
+          <div class="about-feature" data-reveal="left">
             <div class="icon-fill"><svg class="icon"><use href="#icon-shield"/></svg></div>
             <span>Garantia em todos os serviços</span>
           </div>
-          <div class="about-feature">
+          <div class="about-feature" data-reveal="right">
             <div class="icon-fill"><svg class="icon"><use href="#icon-bolt"/></svg></div>
             <span>Rapidez na entrega</span>
           </div>
-          <div class="about-feature">
+          <div class="about-feature" data-reveal="right">
             <div class="icon-fill"><svg class="icon"><use href="#icon-chat"/></svg></div>
             <span>Orçamento sem compromisso</span>
           </div>
@@ -1119,7 +1261,7 @@ footer strong { color: rgba(255,255,255,0.8); }
 
 <section id="servicos" class="section">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" data-reveal>
       <h2>Serviços de <span>Celular</span></h2>
       <p>Soluções completas para o seu dispositivo</p>
     </div>
@@ -1129,12 +1271,12 @@ footer strong { color: rgba(255,255,255,0.8); }
 
 <section id="scooters" class="section">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" data-reveal>
       <h2>Nossas <span>Scooters</span></h2>
       <p>Mobilidade urbana com qualidade e procedência</p>
     </div>
     <div class="scooters-grid" id="scootersGrid"></div>
-    <div style="text-align:center;margin-top:32px;">
+    <div style="text-align:center;margin-top:32px;" data-reveal>
       <a href="https://wa.me/5548988581637?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20as%20scooters%20da%20RR%20Celulares." target="_blank" rel="noopener" class="btn" style="display:inline-flex;background:var(--accent);color:#fff;padding:14px 32px;border-radius:10px;font-weight:600;text-decoration:none;gap:8px;">
         <svg class="icon icon-sm icon-whatsapp"><use href="#icon-whatsapp"/></svg> Consultar estoque atual
       </a>
@@ -1144,38 +1286,38 @@ footer strong { color: rgba(255,255,255,0.8); }
 
 <section id="diferenciais" class="section">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" data-reveal>
       <h2>Nossos <span>Diferenciais</span></h2>
       <p>Por que escolher a RR Celulares?</p>
     </div>
     <div class="diffs-grid">
-      <div class="diff-card">
-        <div class="icon-wrap"><svg class="icon"><use href="#icon-search"/></svg></div>
+      <div class="diff-card" data-reveal="scale">
+        <div class="icon-wrap"><svg class="icon icon-float-3d"><use href="#icon-search"/></svg></div>
         <h3>Diagnóstico Gratuito</h3>
         <p>Analisamos seu aparelho sem custo e explicamos tudo antes de qualquer serviço.</p>
       </div>
-      <div class="diff-card">
-        <div class="icon-wrap"><svg class="icon"><use href="#icon-shield"/></svg></div>
+      <div class="diff-card" data-reveal="scale">
+        <div class="icon-wrap"><svg class="icon icon-float-3d"><use href="#icon-shield"/></svg></div>
         <h3>Garantia Total</h3>
         <p>Todo serviço tem garantia. Se algo não ficar perfeito, a gente resolve.</p>
       </div>
-      <div class="diff-card">
-        <div class="icon-wrap"><svg class="icon"><use href="#icon-clock"/></svg></div>
+      <div class="diff-card" data-reveal="scale">
+        <div class="icon-wrap"><svg class="icon icon-float-3d"><use href="#icon-clock"/></svg></div>
         <h3>Agilidade</h3>
         <p>Serviços rápidos sem abrir mão da qualidade. Muitos reparos ficam prontos no mesmo dia.</p>
       </div>
-      <div class="diff-card">
-        <div class="icon-wrap"><svg class="icon"><use href="#icon-wrench"/></svg></div>
+      <div class="diff-card" data-reveal="scale">
+        <div class="icon-wrap"><svg class="icon icon-float-3d"><use href="#icon-wrench"/></svg></div>
         <h3>Peças Originais</h3>
         <p>Trabalhamos com peças certificadas e garantimos a procedência de cada componente.</p>
       </div>
-      <div class="diff-card">
-        <div class="icon-wrap"><svg class="icon"><use href="#icon-pin"/></svg></div>
+      <div class="diff-card" data-reveal="scale">
+        <div class="icon-wrap"><svg class="icon icon-float-3d"><use href="#icon-pin"/></svg></div>
         <h3>Localização</h3>
         <p>Estamos em Balneário Camboriú, na Rua Maria Manzoto, 54 — São Judas.</p>
       </div>
-      <div class="diff-card">
-        <div class="icon-wrap"><svg class="icon"><use href="#icon-chat"/></svg></div>
+      <div class="diff-card" data-reveal="scale">
+        <div class="icon-wrap"><svg class="icon icon-float-3d"><use href="#icon-chat"/></svg></div>
         <h3>Atendimento Personalizado</h3>
         <p>Você falando direto com quem vai fazer o reparo. Sem intermediários.</p>
       </div>
@@ -1185,7 +1327,7 @@ footer strong { color: rgba(255,255,255,0.8); }
 
 <section id="feedback" class="section">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" data-reveal>
       <h2>O que nossos <span>clientes dizem</span></h2>
       <p>Feedbacks de quem já confiou na RR Celulares</p>
     </div>
@@ -1195,12 +1337,12 @@ footer strong { color: rgba(255,255,255,0.8); }
 
 <section id="contato" class="section">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" data-reveal>
       <h2>Entre em <span>Contato</span></h2>
       <p>Estamos prontos para atender você</p>
     </div>
     <div class="contact-grid">
-      <div class="contact-info">
+      <div class="contact-info" data-reveal="left">
         <h3>RR Celulares</h3>
         <div class="contact-item">
           <div class="icon-wrap"><svg class="icon"><use href="#icon-pin"/></svg></div>
@@ -1241,7 +1383,7 @@ footer strong { color: rgba(255,255,255,0.8); }
           <svg class="icon icon-whatsapp"><use href="#icon-whatsapp"/></svg> Fale pelo WhatsApp
         </a>
       </div>
-      <div class="contact-map">
+      <div class="contact-map" data-reveal="right">
         <div style="padding: 40px 20px;">
           <svg class="icon icon-lg" style="color:var(--accent);margin-bottom:12px;"><use href="#icon-pin"/></svg>
           <p style="font-weight: 600; color: var(--primary); margin-bottom: 8px;" id="mapAddress">Rua Maria Manzoto, 54</p>
@@ -1296,7 +1438,7 @@ var DEFAULT_DATA = {
   businessHours: 'Seg-Sex: 08h às 18h | Sáb: 08h às 12h',
   mapAddress: 'Rua Maria Manzoto, 54',
   mapCity: 'Balneário Camboriú - SC',
-  mapRegion: 'S�o Judas — Próximo ao centro'
+  mapRegion: 'São Judas — Próximo ao centro'
 };
 
 function getData() {
@@ -1335,7 +1477,7 @@ function render() {
   var heroEl = document.getElementById('heroServiceList');
   if (data.heroList && heroEl) {
     heroEl.innerHTML = data.heroList.map(function(item) {
-      return '<li>' + iconSvg('check', 'icon-sm') + ' ' + escHtml(item) + '</li>';
+      return '<li class="tilt-content">' + iconSvg('check', 'icon-sm') + ' ' + escHtml(item) + '</li>';
     }).join('');
   }
 
@@ -1354,11 +1496,11 @@ function render() {
   var sg = document.getElementById('servicesGrid');
   if (sg && data.services) {
     sg.innerHTML = data.services.map(function(s) {
-      return '<div class="service-card">' +
-        '<div class="icon-wrap">' + iconSvg(s.icon, 'icon-lg') + '</div>' +
-        '<h3>' + escHtml(s.name) + '</h3>' +
-        '<p>' + escHtml(s.desc) + '</p>' +
-        '<span class="price-tag">' + escHtml(s.price) + '</span>' +
+      return '<div class="service-card" data-tilt>' +
+        '<div class="icon-wrap tilt-float-sm">' + iconSvg(s.icon, 'icon-lg') + '</div>' +
+        '<h3 class="tilt-content">' + escHtml(s.name) + '</h3>' +
+        '<p class="tilt-content">' + escHtml(s.desc) + '</p>' +
+        '<span class="price-tag tilt-content">' + escHtml(s.price) + '</span>' +
         '</div>';
     }).join('');
   }
@@ -1378,15 +1520,15 @@ function render() {
           specsHtml += '<span>' + iconSvg(s.specs[j], 'icon-sm') + ' ' + escHtml(label) + '</span>';
         }
       }
-      return '<div class="scooter-card">' +
+      return '<div class="scooter-card" data-tilt>' +
         '<div class="scooter-image" style="background:' + (s.bg || 'linear-gradient(135deg, #1a1a1a, #333)') + '">' +
         tagHtml + imageHtml +
         '</div>' +
         '<div class="scooter-info">' +
-        '<h3>' + escHtml(s.name) + '</h3>' +
-        '<div class="specs">' + specsHtml + '</div>' +
-        '<p>' + escHtml(s.desc) + '</p>' +
-        '<div class="price-row">' +
+        '<h3 class="tilt-content">' + escHtml(s.name) + '</h3>' +
+        '<div class="specs tilt-content">' + specsHtml + '</div>' +
+        '<p class="tilt-content">' + escHtml(s.desc) + '</p>' +
+        '<div class="price-row tilt-content">' +
         '<div class="price">' + escHtml(s.price) + ' <small>à vista</small></div>' +
         '<a href="https://wa.me/5548988581637?text=Ol%C3%A1!%20Tenho%20interesse%20na%20' + encodeURIComponent(s.name) + '" target="_blank" rel="noopener" class="btn-small">' + iconSvg('whatsapp', 'icon-sm icon-whatsapp') + ' Quero comprar</a>' +
         '</div></div></div>';
@@ -1397,7 +1539,7 @@ function render() {
   var fg = document.getElementById('feedbackGrid');
   if (fg && data.feedbacks) {
     fg.innerHTML = data.feedbacks.map(function(f) {
-      return '<div class="feedback-card">' +
+      return '<div class="feedback-card" data-reveal>' +
         '<div class="stars">' + starsHtml() + '</div>' +
         '<div class="text">' + escHtml(f.text) + '</div>' +
         '<div class="author">' +
@@ -1423,6 +1565,204 @@ document.querySelectorAll('.nav-links a').forEach(function(l) {
     document.querySelector('.nav-links').classList.remove('open');
   });
 });
+
+/* ===== 3D ANIMATIONS ENGINE ===== */
+
+// --- 3D Tilt Effect ---
+function initTilt() {
+  document.querySelectorAll('[data-tilt]').forEach(function(card) {
+    card.addEventListener('mousemove', function(e) {
+      var rect = card.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      var centerX = rect.width / 2;
+      var centerY = rect.height / 2;
+      var rotateX = ((y - centerY) / centerY) * -8;
+      var rotateY = ((x - centerX) / centerX) * 8;
+      card.style.transform = 'perspective(600px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(1.02,1.02,1.02)';
+    });
+    card.addEventListener('mouseleave', function() {
+      card.style.transform = 'perspective(600px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+    });
+  });
+}
+
+// --- Animated Counters ---
+function initCounters() {
+  document.querySelectorAll('[data-count]').forEach(function(el) {
+    var target = el.textContent.trim();
+    var isPercent = target.indexOf('%') > -1;
+    var isK = target.indexOf('K') > -1 || target.indexOf('k') > -1;
+    var isPlus = target.indexOf('+') > -1;
+    var numStr = target.replace(/[^0-9.]/g, '');
+    var finalNum = parseFloat(numStr) || 0;
+    var suffix = isPercent ? '%' : '';
+    var prefix = '';
+
+    el.dataset.display = target;
+    el.textContent = '0' + suffix;
+
+    var duration = 1500;
+    var startTime = null;
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.round(eased * finalNum);
+
+      if (isPercent) {
+        el.textContent = current + '%';
+      } else {
+        el.textContent = current + (isPlus ? '+' : '');
+      }
+
+      el.classList.add('animate');
+      setTimeout(function() { el.classList.remove('animate'); }, 400);
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target;
+      }
+    }
+
+    requestAnimationFrame(step);
+  });
+}
+
+// --- Scroll Reveal ---
+function initScrollReveal() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Trigger counters inside revealed elements
+        entry.target.querySelectorAll('[data-count]').forEach(function(el) {
+          if (!el.dataset.counted) {
+            el.dataset.counted = 'true';
+            // Re-init counter logic
+            var target = el.dataset.display || el.textContent.trim();
+            var isPercent = target.indexOf('%') > -1;
+            var isPlus = target.indexOf('+') > -1;
+            var numStr = target.replace(/[^0-9.]/g, '');
+            var finalNum = parseFloat(numStr) || 0;
+            var suffix = isPercent ? '%' : '';
+            el.textContent = '0' + suffix;
+            var duration = 1500;
+            var startTime2 = null;
+            function step2(timestamp) {
+              if (!startTime2) startTime2 = timestamp;
+              var progress = Math.min((timestamp - startTime2) / duration, 1);
+              var eased = 1 - Math.pow(1 - progress, 3);
+              var current = Math.round(eased * finalNum);
+              if (isPercent) el.textContent = current + '%';
+              else el.textContent = current + (isPlus ? '+' : '');
+              el.classList.add('animate');
+              setTimeout(function() { el.classList.remove('animate'); }, 400);
+              if (progress < 1) requestAnimationFrame(step2);
+              else el.textContent = target;
+            }
+            requestAnimationFrame(step2);
+          }
+        });
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('[data-reveal]').forEach(function(el) {
+    observer.observe(el);
+  });
+}
+
+// --- 3D Parallax on Hero ---
+function initParallax() {
+  var hero = document.querySelector('.hero');
+  if (!hero) return;
+  var glow1 = hero.querySelector('.hero-glow-1');
+  var glow2 = hero.querySelector('.hero-glow-2');
+  if (!glow1 || !glow2) return;
+
+  window.addEventListener('scroll', function() {
+    var scrollY = window.scrollY;
+    var heroRect = hero.getBoundingClientRect();
+    var heroTop = heroRect.top + scrollY;
+    var offset = scrollY - heroTop;
+    if (offset < 0) offset = 0;
+    var maxScroll = hero.offsetHeight;
+    var progress = Math.min(offset / maxScroll, 1);
+
+    glow1.style.transform = 'translate(' + (progress * -30) + 'px, ' + (progress * -20) + 'px) scale(' + (1 - progress * 0.2) + ')';
+    glow2.style.transform = 'translate(' + (progress * 20) + 'px, ' + (progress * 15) + 'px) scale(' + (1 - progress * 0.15) + ')';
+  });
+}
+
+// --- Hero 3D Particles ---
+function initParticles() {
+  var hero = document.querySelector('.hero');
+  if (!hero) return;
+  var container = document.createElement('div');
+  container.className = 'hero-particles';
+  hero.appendChild(container);
+
+  var count = 20;
+  for (var i = 0; i < count; i++) {
+    var p = document.createElement('div');
+    p.className = 'hero-particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = p.style.height = (2 + Math.random() * 5) + 'px';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.opacity = 0.2 + Math.random() * 0.5;
+    container.appendChild(p);
+  }
+}
+
+// --- Mouse-follow 3D parallax on hero visual ---
+function initHero3D() {
+  var heroVisual = document.querySelector('.hero-visual');
+  if (!heroVisual) return;
+  heroVisual.addEventListener('mousemove', function(e) {
+    var rect = heroVisual.getBoundingClientRect();
+    var x = (e.clientX - rect.left) / rect.width - 0.5;
+    var y = (e.clientY - rect.top) / rect.height - 0.5;
+    var card = heroVisual.querySelector('.hero-card');
+    if (card) {
+      card.style.transform = 'perspective(800px) rotateY(' + (x * 6) + 'deg) rotateX(' + (y * -6) + 'deg) translateZ(10px)';
+    }
+  });
+  heroVisual.addEventListener('mouseleave', function() {
+    var card = heroVisual.querySelector('.hero-card');
+    if (card) card.style.transform = '';
+  });
+}
+
+// --- Init all 3D animations ---
+function init3D() {
+  initParticles();
+  initParallax();
+  initScrollReveal();
+  // Tilt and hero3d need to run after dynamic content is rendered
+  setTimeout(function() {
+    initTilt();
+    initHero3D();
+  }, 100);
+}
+
+// Run after render
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(init3D, 200);
+});
+
+// Re-init on dynamic render (admin changes)
+var origRender = render;
+render = function() {
+  origRender();
+  setTimeout(function() {
+    initTilt();
+    initScrollReveal();
+  }, 100);
+};
 </script>
 
 </body>
