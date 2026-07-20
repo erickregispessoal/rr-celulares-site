@@ -2331,35 +2331,17 @@ function initIPhone3D() {
   var scene = document.getElementById('iphoneScene');
   if (!wrapper || !scene) return;
 
-  var layers = scene.querySelectorAll('.iphone-layer');
-  var baseTransforms = [];
-  layers.forEach(function(l) {
-    baseTransforms.push(l.style.transform || '');
-  });
-
   wrapper.addEventListener('mousemove', function(e) {
     var rect = wrapper.getBoundingClientRect();
     var x = (e.clientX - rect.left) / rect.width - 0.5;
     var y = (e.clientY - rect.top) / rect.height - 0.5;
-
-    var rotateY = x * 12;
+    var rotateY = x * 15;
     var rotateX = y * -12;
-
     scene.style.transform = 'rotateY(' + rotateY + 'deg) rotateX(' + rotateX + 'deg)';
-
-    layers.forEach(function(layer, i) {
-      var depth = parseFloat(layer.dataset.depth) || 0;
-      var layerRotateY = x * (4 + depth * 0.5);
-      var layerRotateX = y * (-4 - depth * 0.5);
-      layer.style.transform = 'rotateY(' + layerRotateY + 'deg) rotateX(' + layerRotateX + 'deg)';
-    });
   });
 
   wrapper.addEventListener('mouseleave', function() {
     scene.style.transform = '';
-    layers.forEach(function(layer) {
-      layer.style.transform = '';
-    });
   });
 }
 
