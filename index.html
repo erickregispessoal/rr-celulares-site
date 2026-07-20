@@ -1074,33 +1074,95 @@ footer strong { color: rgba(255,255,255,0.8); }
 
 /* --- Layer specific styles --- */
 .layer-back .layer-inner {
-  background: linear-gradient(135deg, #1a1a1a, #2a2a2a, #1a1a1a);
-  border: 1px solid #333;
+  background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 40%, #0d0d0d 100%);
+  border: 1px solid #444;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
 }
 .layer-back .apple-logo {
   position: absolute;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 32px;
-  height: 38px;
-  background: rgba(255,255,255,0.08);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-}
-.layer-back .camera-module {
-  position: absolute;
-  top: 30px;
+  top: 85px;
   left: 50%;
   transform: translateX(-50%);
   width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  background: rgba(0,0,0,0.5);
-  border: 1px solid #333;
+  height: 34px;
+  background: rgba(255,255,255,0.06);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  border-radius: 2px;
 }
+.layer-back .apple-logo::after {
+  content: 'iphone';
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.35rem;
+  color: rgba(255,255,255,0.1);
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+.layer-back .camera-module {
+  position: absolute;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: radial-gradient(circle at 40% 40%, #1a1a1a, #000);
+  border: 1px solid #333;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.layer-back .camera-module::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #222, #000);
+  border: 1px solid #444;
+}
+.layer-back .camera-module::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #222, #000);
+  border: 1px solid #444;
+}
+.layer-back .bottom-grill {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 4px;
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+}
+.layer-back .bottom-grill span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #333;
+}
+.layer-back .antenna-band {
+  position: absolute;
+  height: 2px;
+  background: rgba(255,255,255,0.03);
+}
+.layer-back .antenna-band-1 { top: 22px; left: 0; right: 0; }
+.layer-back .antenna-band-2 { bottom: 22px; left: 0; right: 0; }
 
+/* --- Battery --- */
 .layer-battery .layer-inner {
-  background: linear-gradient(180deg, #1a1a1a, #0d0d0d);
+  background: linear-gradient(180deg, #1a1a1a 0%, #111 50%, #1a1a1a 100%);
   border: 1px solid #2a2a2a;
 }
 .layer-battery .battery-cell {
@@ -1108,11 +1170,11 @@ footer strong { color: rgba(255,255,255,0.8); }
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 120px;
-  height: 160px;
-  background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
-  border-radius: 12px;
-  border: 1px solid #333;
+  width: 110px;
+  height: 170px;
+  background: linear-gradient(180deg, #2a3030, #1a1e1e);
+  border-radius: 14px;
+  border: 1px solid #3a3a3a;
   box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
 }
 .layer-battery .battery-cell::after {
@@ -1121,34 +1183,65 @@ footer strong { color: rgba(255,255,255,0.8); }
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80px;
-  height: 100px;
-  background: linear-gradient(180deg, #25D366, #1a9e4a);
-  border-radius: 4px;
-  opacity: 0.4;
+  width: 75px;
+  height: 110px;
+  background: linear-gradient(180deg, #20b85c 0%, #25D366 30%, #1a9e4a 100%);
+  border-radius: 6px;
+  opacity: 0.6;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+.layer-battery .battery-cell .battery-text {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.3rem;
+  color: rgba(255,255,255,0.08);
+  white-space: nowrap;
+  letter-spacing: 0.5px;
 }
 .layer-battery .battery-connector {
   position: absolute;
-  bottom: 40px;
+  bottom: 36px;
   left: 50%;
   transform: translateX(-50%);
-  width: 40px;
-  height: 8px;
-  background: #444;
+  width: 32px;
+  height: 10px;
+  background: #c49a2a;
   border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+.layer-battery .battery-flex {
+  position: absolute;
+  bottom: 46px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 30px;
+  background: linear-gradient(180deg, #c49a2a, #8a6a1a);
+  border-radius: 1px;
 }
 
+/* --- Logic Board --- */
 .layer-logic .layer-inner {
-  background: linear-gradient(135deg, #0a1a0a, #0d0d0d, #0a1a0a);
+  background: linear-gradient(135deg, #0a1a0a 0%, #0d0d0d 50%, #0a1a0a 100%);
   border: 1px solid #2a2a2a;
 }
 .layer-logic .chip {
   position: absolute;
   border-radius: 2px;
-  background: #1a1a1a;
-  border: 1px solid #333;
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.03);
 }
-.layer-logic .chip-a { top: 30px; left: 50%; transform: translateX(-50%); width: 60px; height: 80px; }
+.layer-logic .chip-a {
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 75px;
+  border-color: #4a4a4a;
+}
 .layer-logic .chip-a::after {
   content: 'A16';
   position: absolute;
@@ -1156,12 +1249,43 @@ footer strong { color: rgba(255,255,255,0.8); }
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 0.5rem;
-  color: #666;
-  font-weight: 700;
+  color: #888;
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
-.layer-logic .chip-b { top: 130px; left: 20px; width: 40px; height: 50px; }
-.layer-logic .chip-c { top: 130px; right: 20px; width: 40px; height: 50px; }
-.layer-logic .chip-d { top: 200px; left: 50%; transform: translateX(-50%); width: 100px; height: 30px; }
+.layer-logic .chip-bionic {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 65px;
+  background: linear-gradient(135deg, #333, #222);
+  border: 1px solid #555;
+  border-radius: 2px;
+  z-index: 1;
+}
+.layer-logic .chip-b { top: 120px; left: 12px; width: 42px; height: 48px; border-color: #4a5a4a; }
+.layer-logic .chip-b::after {
+  content: '●';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.6rem;
+  color: #7a7a7a;
+}
+.layer-logic .chip-c { top: 120px; right: 12px; width: 42px; height: 48px; border-color: #4a4a5a; }
+.layer-logic .chip-c::after {
+  content: '●';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.6rem;
+  color: #7a7a7a;
+}
+.layer-logic .chip-d { top: 185px; left: 50%; transform: translateX(-50%); width: 90px; height: 24px; border-color: #3a4a3a; }
 .layer-logic .chip-d::after {
   content: '●●●●';
   position: absolute;
@@ -1169,85 +1293,151 @@ footer strong { color: rgba(255,255,255,0.8); }
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 0.3rem;
-  color: #555;
-  letter-spacing: 4px;
+  color: #666;
+  letter-spacing: 6px;
 }
+.layer-logic .gold-pad {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  background: #c49a2a;
+  box-shadow: 0 0 3px rgba(196,154,42,0.3);
+}
+.layer-logic .gold-pad-1 { top: 44px; left: 8px; }
+.layer-logic .gold-pad-2 { top: 44px; right: 8px; }
+.layer-logic .gold-pad-3 { top: 156px; left: 8px; width: 16px; height: 4px; }
+.layer-logic .gold-pad-4 { top: 156px; right: 8px; width: 16px; height: 4px; }
+.layer-logic .pcb-trace {
+  position: absolute;
+  height: 1px;
+  background: rgba(196,154,42,0.15);
+}
+.layer-logic .pcb-trace-1 { top: 100px; left: 15px; right: 15px; }
+.layer-logic .pcb-trace-2 { top: 165px; left: 25px; right: 25px; }
 
+/* --- Midframe --- */
 .layer-midframe .layer-inner {
-  background: linear-gradient(180deg, #2a2a2a, #1a1a1a, #2a2a2a);
-  border: 1px solid #444;
+  background: linear-gradient(180deg, #333 0%, #222 30%, #1a1a1a 70%, #2a2a2a 100%);
+  border: 1px solid #4a4a4a;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
 }
 .layer-midframe .screw {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: #555;
-  border: 1px solid #666;
+  background: radial-gradient(circle at 35% 35%, #888, #444);
+  border: 1px solid #555;
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
 }
-.layer-midframe .screw-1 { top: 16px; left: 20px; }
-.layer-midframe .screw-2 { top: 16px; right: 20px; }
-.layer-midframe .screw-3 { bottom: 16px; left: 20px; }
-.layer-midframe .screw-4 { bottom: 16px; right: 20px; }
+.layer-midframe .screw-1 { top: 18px; left: 22px; }
+.layer-midframe .screw-2 { top: 18px; right: 22px; }
+.layer-midframe .screw-3 { bottom: 18px; left: 22px; }
+.layer-midframe .screw-4 { bottom: 18px; right: 22px; }
+.layer-midframe .screw-5 { top: 80px; left: 12px; }
+.layer-midframe .screw-6 { top: 80px; right: 12px; }
 .layer-midframe .wire {
   position: absolute;
   height: 2px;
-  background: #c44;
+  border-radius: 1px;
+  opacity: 0.8;
+}
+.layer-midframe .wire-1 { top: 62px; left: 10px; right: 30px; background: #c44; box-shadow: 0 0 3px rgba(204,68,68,0.3); }
+.layer-midframe .wire-2 { top: 195px; left: 25px; right: 10px; background: #48f; box-shadow: 0 0 3px rgba(68,136,255,0.3); }
+.layer-midframe .wire-3 { top: 145px; left: 8px; width: 30px; background: #afa; box-shadow: 0 0 3px rgba(170,255,170,0.2); }
+.layer-midframe .wire-4 { top: 148px; right: 8px; width: 25px; background: #fa8; box-shadow: 0 0 3px rgba(255,170,136,0.2); }
+.layer-midframe .speaker-grill {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+}
+.layer-midframe .speaker-grill span {
+  width: 3px;
+  height: 8px;
+  background: #333;
   border-radius: 1px;
 }
-.layer-midframe .wire-1 { top: 60px; left: 10px; right: 40px; }
-.layer-midframe .wire-2 { top: 180px; left: 30px; right: 10px; background: #48f; }
 
+/* --- Display --- */
 .layer-display .layer-inner {
   background: #000;
-  border: 1px solid #222;
+  border: 1px solid #1a1a1a;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
 }
 .layer-display .display-notch {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
-  height: 24px;
+  width: 85px;
+  height: 26px;
   background: #000;
-  border-radius: 0 0 12px 12px;
-  border: 1px solid #1a1a1a;
-  border-top: none;
+  border-radius: 0 0 14px 14px;
 }
 .layer-display .display-notch::after {
   content: '';
   position: absolute;
-  top: 6px;
+  top: 7px;
   left: 50%;
   transform: translateX(-50%);
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #222;
+  background: radial-gradient(circle at 40% 35%, #333, #1a1a1a);
+  border: 1px solid #222;
 }
 .layer-display .display-content {
   position: absolute;
   top: 50px;
-  left: 24px;
-  right: 24px;
-  bottom: 30px;
+  left: 20px;
+  right: 20px;
+  bottom: 28px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   align-items: center;
   justify-content: center;
 }
 .layer-display .display-bar {
-  width: 80%;
-  height: 6px;
+  width: 85%;
+  height: 5px;
   background: linear-gradient(90deg, #1a1a1a, #2a2a2a, #1a1a1a);
-  border-radius: 3px;
+  border-radius: 2px;
 }
-.layer-display .display-bar-short { width: 50%; }
+.layer-display .display-bar-short { width: 55%; }
+.layer-display .display-icon {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+}
+.layer-display .display-icon-1 { top: 58px; left: 28px; }
+.layer-display .display-icon-2 { top: 58px; left: 50px; }
+.layer-display .display-icon-3 { top: 58px; right: 28px; }
+.layer-display .display-icon-4 { top: 80px; left: 28px; }
+.layer-display .display-icon-5 { top: 80px; left: 50px; }
+.layer-display .display-flex {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(180deg, #1a1a1a, #0d0d0d);
+  border-radius: 0 0 4px 4px;
+}
 
+/* --- Glass --- */
 .layer-glass .layer-inner {
-  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02), rgba(255,255,255,0.06));
-  border: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 40%, rgba(200,220,255,0.04) 60%, rgba(255,255,255,0.06) 100%);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(1px);
 }
 .glass-shine::before {
   content: '';
@@ -1256,12 +1446,22 @@ footer strong { color: rgba(255,255,255,0.8); }
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.03) 45%, transparent 50%);
-  animation: glass-shine 6s ease-in-out infinite;
+  background: linear-gradient(135deg, transparent 35%, rgba(255,255,255,0.04) 42%, rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.02) 48%, transparent 55%);
+  animation: glass-shine 5s ease-in-out infinite;
+}
+.glass-shine::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 15px;
+  width: 40px;
+  height: 8px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), transparent);
+  border-radius: 4px;
 }
 @keyframes glass-shine {
-  0%, 100% { transform: translateX(-30%) translateY(-30%); }
-  50% { transform: translateX(30%) translateY(30%); }
+  0%, 100% { transform: translateX(-40%) translateY(-30%) rotate(10deg); }
+  50% { transform: translateX(40%) translateY(30%) rotate(10deg); }
 }
 
 /* Exploded state as default (always visible) */
@@ -1537,22 +1737,35 @@ footer strong { color: rgba(255,255,255,0.8); }
             <div class="layer-inner">
               <div class="apple-logo"></div>
               <div class="camera-module"></div>
+              <div class="antenna-band antenna-band-1"></div>
+              <div class="antenna-band antenna-band-2"></div>
+              <div class="bottom-grill"><span></span><span></span><span></span><span></span><span></span></div>
             </div>
             <div class="layer-tag">Carcaça</div>
           </div>
           <div class="iphone-layer layer-battery" data-depth="1">
             <div class="layer-inner">
-              <div class="battery-cell"></div>
+              <div class="battery-cell">
+                <span class="battery-text">Li-Ion 3349mAh</span>
+              </div>
+              <div class="battery-flex"></div>
               <div class="battery-connector"></div>
             </div>
             <div class="layer-tag">Bateria</div>
           </div>
           <div class="iphone-layer layer-logic" data-depth="2">
             <div class="layer-inner">
+              <div class="chip-bionic"></div>
               <div class="chip chip-a"></div>
               <div class="chip chip-b"></div>
               <div class="chip chip-c"></div>
               <div class="chip chip-d"></div>
+              <div class="gold-pad gold-pad-1"></div>
+              <div class="gold-pad gold-pad-2"></div>
+              <div class="gold-pad gold-pad-3"></div>
+              <div class="gold-pad gold-pad-4"></div>
+              <div class="pcb-trace pcb-trace-1"></div>
+              <div class="pcb-trace pcb-trace-2"></div>
             </div>
             <div class="layer-tag">Placa Lógica</div>
           </div>
@@ -1562,20 +1775,31 @@ footer strong { color: rgba(255,255,255,0.8); }
               <div class="screw screw-2"></div>
               <div class="screw screw-3"></div>
               <div class="screw screw-4"></div>
+              <div class="screw screw-5"></div>
+              <div class="screw screw-6"></div>
               <div class="wire wire-1"></div>
               <div class="wire wire-2"></div>
+              <div class="wire wire-3"></div>
+              <div class="wire wire-4"></div>
+              <div class="speaker-grill"><span></span><span></span><span></span><span></span><span></span><span></span></div>
             </div>
             <div class="layer-tag">Estrutura</div>
           </div>
           <div class="iphone-layer layer-display" data-depth="4">
             <div class="layer-inner">
               <div class="display-notch"></div>
+              <div class="display-icon display-icon-1"></div>
+              <div class="display-icon display-icon-2"></div>
+              <div class="display-icon display-icon-3"></div>
+              <div class="display-icon display-icon-4"></div>
+              <div class="display-icon display-icon-5"></div>
               <div class="display-content">
                 <div class="display-bar"></div>
                 <div class="display-bar"></div>
                 <div class="display-bar"></div>
                 <div class="display-bar display-bar-short"></div>
               </div>
+              <div class="display-flex"></div>
             </div>
             <div class="layer-tag">Display</div>
           </div>
