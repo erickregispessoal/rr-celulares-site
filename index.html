@@ -1073,7 +1073,6 @@ footer strong { color: rgba(255,255,255,0.8); }
 }
 
 /* --- Layer specific styles --- */
-/* Shared layer base styling */
 .iphone-layer .layer-inner {
   position: absolute;
   top: 4px;
@@ -1087,79 +1086,66 @@ footer strong { color: rgba(255,255,255,0.8); }
   justify-content: center;
 }
 
-/* BACK COVER - Dark, simple */
+/* BACK COVER - Deep navy with subtle glow */
 .layer-back .layer-inner {
-  background: linear-gradient(180deg, #2a2a2a, #0d0d0d);
-  border: 2px solid #444;
-  box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
+  background: linear-gradient(180deg, #1a1a2e, #0d0d1a);
+  border: 2px solid #2a2a4e;
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.8);
 }
 .layer-back .apple-logo {
   width: 28px;
   height: 34px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.06);
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   position: absolute;
   top: 80px;
   left: 50%;
   transform: translateX(-50%);
+  filter: drop-shadow(0 0 4px rgba(255,255,255,0.05));
 }
 .layer-back .camera-module {
   position: absolute;
-  top: 30px;
+  top: 28px;
   left: 50%;
   transform: translateX(-50%);
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: #000;
-  border: 2px solid #3a3a3a;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: radial-gradient(circle at 40% 35%, #1a1a3a, #000);
+  border: 2px solid #3a3a5e;
+  box-shadow: 0 0 12px rgba(100,100,255,0.1);
 }
-.layer-back .camera-module::before {
-  content: '';
+.layer-back .lens {
   position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 14px;
-  height: 14px;
   border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%, #333, #000);
-  border: 1px solid #555;
+  border: 1px solid #4a4a6e;
 }
-.layer-back .camera-module::after {
-  content: '';
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #111;
-  border: 1px solid #444;
-}
+.layer-back .lens-1 { top: 6px; left: 6px; width: 14px; height: 14px; background: radial-gradient(circle at 35% 30%, #333, #000); box-shadow: inset 0 0 6px rgba(0,0,0,0.8); }
+.layer-back .lens-2 { top: 6px; right: 6px; width: 10px; height: 10px; background: #0a0a1a; }
+.layer-back .lens-3 { bottom: 6px; left: 50%; transform: translateX(-50%); width: 16px; height: 10px; background: #0a0a1a; border-radius: 4px; }
 .layer-back .model-text {
   position: absolute;
   bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 0.35rem;
-  color: rgba(255,255,255,0.06);
-  letter-spacing: 2px;
-  font-family: 'Inter', sans-serif;
+  color: rgba(255,255,255,0.04);
+  letter-spacing: 3px;
 }
 
-/* BATTERY - High contrast green/white/gold */
+/* BATTERY - X-ray style with neon green glow */
 .layer-battery .layer-inner {
-  background: linear-gradient(180deg, #1a1e1e, #111);
-  border: 2px solid #2a3a2a;
+  background: linear-gradient(180deg, #0a1a0a, #050d05);
+  border: 2px solid #1a3a1a;
 }
 .layer-battery .battery-body {
   width: 130px;
   height: 180px;
-  background: linear-gradient(180deg, #e8e8e8 0%, #ccc 50%, #d8d8d8 100%);
+  background: linear-gradient(180deg, rgba(52,199,89,0.08), rgba(52,199,89,0.03));
   border-radius: 16px;
-  border: 2px solid #999;
+  border: 2px solid rgba(52,199,89,0.2);
   position: relative;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 0 30px rgba(52,199,89,0.08), inset 0 0 30px rgba(52,199,89,0.03);
 }
 .layer-battery .battery-body::before {
   content: '';
@@ -1169,32 +1155,33 @@ footer strong { color: rgba(255,255,255,0.8); }
   transform: translate(-50%, -50%);
   width: 100px;
   height: 140px;
-  background: linear-gradient(180deg, #34c759, #28a745);
+  background: linear-gradient(180deg, rgba(52,199,89,0.3), rgba(40,167,69,0.2));
   border-radius: 8px;
-  opacity: 0.85;
+  box-shadow: 0 0 20px rgba(52,199,89,0.15), inset 0 0 20px rgba(52,199,89,0.1);
 }
 .layer-battery .battery-body::after {
-  content: 'Li-Ion 3.8V';
+  content: 'Li-Ion  3349mAh';
   position: absolute;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.45rem;
-  color: #666;
+  font-size: 0.4rem;
+  color: rgba(52,199,89,0.3);
   font-weight: 600;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
   white-space: nowrap;
 }
 .layer-battery .battery-tab {
   position: absolute;
-  bottom: 30px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
-  width: 24px;
-  height: 28px;
-  background: linear-gradient(180deg, #e8c840, #c49a2a);
+  width: 20px;
+  height: 26px;
+  background: linear-gradient(180deg, rgba(232,200,64,0.6), rgba(196,154,42,0.4));
   border-radius: 3px;
-  border: 1px solid #a08020;
+  border: 1px solid rgba(232,200,64,0.3);
+  box-shadow: 0 0 10px rgba(232,200,64,0.15);
   z-index: 2;
 }
 .layer-battery .battery-flex {
@@ -1202,27 +1189,27 @@ footer strong { color: rgba(255,255,255,0.8); }
   bottom: 58px;
   left: 50%;
   transform: translateX(-50%);
-  width: 8px;
-  height: 35px;
-  background: linear-gradient(180deg, #e8c840, #c49a2a, #8a6a1a);
+  width: 6px;
+  height: 32px;
+  background: linear-gradient(180deg, rgba(232,200,64,0.5), rgba(196,154,42,0.3));
   border-radius: 1px;
   z-index: 1;
 }
 .layer-battery .battery-spec {
   position: absolute;
-  bottom: 4px;
+  bottom: 6px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 0.3rem;
-  color: rgba(255,255,255,0.1);
-  letter-spacing: 0.5px;
+  color: rgba(52,199,89,0.15);
+  letter-spacing: 1px;
   white-space: nowrap;
 }
 
-/* LOGIC BOARD - PCB style green/gold */
+/* LOGIC BOARD - Dark PCB with neon green traces */
 .layer-logic .layer-inner {
-  background: linear-gradient(135deg, #0a2a0a, #051205);
-  border: 2px solid #1a3a1a;
+  background: linear-gradient(135deg, #051205, #020802);
+  border: 2px solid #0a2a0a;
 }
 .layer-logic .pcb-bg {
   position: absolute;
@@ -1230,9 +1217,9 @@ footer strong { color: rgba(255,255,255,0.8); }
   left: 8px;
   right: 8px;
   bottom: 10px;
-  background: linear-gradient(180deg, #0d2d0d, #081a08);
+  background: linear-gradient(180deg, rgba(10,40,10,0.5), rgba(5,20,5,0.3));
   border-radius: 12px;
-  border: 1px solid #1a3a1a;
+  border: 1px solid rgba(20,60,20,0.3);
 }
 .layer-logic .chip-main {
   position: absolute;
@@ -1241,10 +1228,10 @@ footer strong { color: rgba(255,255,255,0.8); }
   transform: translateX(-50%);
   width: 64px;
   height: 72px;
-  background: linear-gradient(135deg, #4a4a4a, #2a2a2a);
+  background: linear-gradient(135deg, rgba(200,200,200,0.1), rgba(100,100,100,0.05));
   border-radius: 4px;
-  border: 2px solid #666;
-  box-shadow: 0 0 0 1px #888, inset 0 1px 0 rgba(255,255,255,0.1);
+  border: 1px solid rgba(200,200,200,0.2);
+  box-shadow: 0 0 15px rgba(200,200,200,0.05), inset 0 0 10px rgba(255,255,255,0.02);
 }
 .layer-logic .chip-main::after {
   content: 'A16';
@@ -1253,19 +1240,19 @@ footer strong { color: rgba(255,255,255,0.8); }
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 0.55rem;
-  color: #aaa;
+  color: rgba(200,200,200,0.3);
   font-weight: 800;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 .layer-logic .chip-sm {
   position: absolute;
-  background: linear-gradient(135deg, #333, #222);
+  background: linear-gradient(135deg, rgba(150,150,150,0.08), rgba(80,80,80,0.04));
   border-radius: 2px;
-  border: 1px solid #555;
+  border: 1px solid rgba(150,150,150,0.15);
 }
 .layer-logic .chip-sm-1 { top: 112px; left: 14px; width: 40px; height: 45px; }
 .layer-logic .chip-sm-2 { top: 112px; right: 14px; width: 40px; height: 45px; }
-.layer-logic .chip-sm-3 { top: 170px; left: 50%; transform: translateX(-50%); width: 90px; height: 22px; border-color: #4a6a4a; }
+.layer-logic .chip-sm-3 { top: 170px; left: 50%; transform: translateX(-50%); width: 90px; height: 22px; }
 .layer-logic .chip-sm-3::after {
   content: '▸▸▸▸';
   position: absolute;
@@ -1273,13 +1260,14 @@ footer strong { color: rgba(255,255,255,0.8); }
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 0.3rem;
-  color: #7a8a7a;
-  letter-spacing: 4px;
+  color: rgba(100,200,100,0.2);
+  letter-spacing: 6px;
 }
 .layer-logic .trace {
   position: absolute;
   height: 1px;
-  background: rgba(196, 154, 42, 0.2);
+  background: rgba(52,199,89,0.08);
+  box-shadow: 0 0 4px rgba(52,199,89,0.05);
 }
 .layer-logic .trace-1 { top: 105px; left: 12px; right: 12px; }
 .layer-logic .trace-2 { top: 160px; left: 20px; right: 20px; }
@@ -1287,27 +1275,29 @@ footer strong { color: rgba(255,255,255,0.8); }
 .layer-logic .gold-contact {
   position: absolute;
   width: 8px;
-  height: 6px;
-  background: #c49a2a;
+  height: 5px;
+  background: rgba(232,200,64,0.2);
   border-radius: 1px;
+  box-shadow: 0 0 6px rgba(232,200,64,0.1);
 }
 .layer-logic .gold-contact-1 { top: 42px; left: 6px; }
 .layer-logic .gold-contact-2 { top: 42px; right: 6px; }
 .layer-logic .gold-contact-3 { top: 148px; left: 6px; width: 14px; }
 .layer-logic .gold-contact-4 { top: 148px; right: 6px; width: 14px; }
 
-/* MIDFRAME - Silver/metallic */
+/* MIDFRAME - Tech skeleton with colored flex cables */
 .layer-midframe .layer-inner {
-  background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 30%, #1a1a1a 70%, #2a2a2a 100%);
-  border: 2px solid #5a5a5a;
+  background: linear-gradient(180deg, rgba(40,40,60,0.4), rgba(20,20,30,0.3));
+  border: 2px solid rgba(80,80,120,0.2);
 }
 .layer-midframe .screw {
   position: absolute;
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #ccc, #666);
-  border: 1px solid #888;
+  background: radial-gradient(circle at 35% 35%, rgba(200,200,200,0.3), rgba(100,100,100,0.1));
+  border: 1px solid rgba(200,200,200,0.15);
+  box-shadow: 0 0 4px rgba(200,200,200,0.05);
 }
 .layer-midframe .screw-1 { top: 20px; left: 24px; }
 .layer-midframe .screw-2 { top: 20px; right: 24px; }
@@ -1320,10 +1310,10 @@ footer strong { color: rgba(255,255,255,0.8); }
   height: 2px;
   border-radius: 1px;
 }
-.layer-midframe .flex-cable-1 { top: 60px; left: 10px; right: 40px; background: #e74c3c; }
-.layer-midframe .flex-cable-2 { top: 200px; left: 30px; right: 10px; background: #3498db; }
-.layer-midframe .flex-cable-3 { top: 145px; left: 6px; width: 35px; background: #2ecc71; }
-.layer-midframe .flex-cable-4 { top: 148px; right: 6px; width: 30px; background: #f39c12; }
+.layer-midframe .flex-cable-1 { top: 60px; left: 10px; right: 40px; background: rgba(231,76,60,0.3); box-shadow: 0 0 8px rgba(231,76,60,0.15); }
+.layer-midframe .flex-cable-2 { top: 200px; left: 30px; right: 10px; background: rgba(52,152,219,0.3); box-shadow: 0 0 8px rgba(52,152,219,0.15); }
+.layer-midframe .flex-cable-3 { top: 145px; left: 6px; width: 35px; background: rgba(46,204,113,0.3); box-shadow: 0 0 8px rgba(46,204,113,0.1); }
+.layer-midframe .flex-cable-4 { top: 148px; right: 6px; width: 30px; background: rgba(243,156,18,0.3); box-shadow: 0 0 8px rgba(243,156,18,0.1); }
 .layer-midframe .speaker-mesh {
   position: absolute;
   bottom: 34px;
@@ -1335,8 +1325,9 @@ footer strong { color: rgba(255,255,255,0.8); }
 .layer-midframe .speaker-mesh span {
   width: 3px;
   height: 7px;
-  background: #444;
+  background: rgba(100,100,100,0.2);
   border-radius: 1px;
+  box-shadow: 0 0 2px rgba(100,100,100,0.05);
 }
 .layer-midframe .frame-cutout {
   position: absolute;
@@ -1345,15 +1336,15 @@ footer strong { color: rgba(255,255,255,0.8); }
   transform: translateX(-50%);
   width: 60px;
   height: 8px;
-  background: #222;
+  background: rgba(0,0,0,0.3);
   border-radius: 4px;
 }
 
-/* DISPLAY - Black with colorful UI elements */
+/* DISPLAY - Dark screen with glowing UI elements */
 .layer-display .layer-inner {
-  background: #000;
-  border: 2px solid #1a1a1a;
-  box-shadow: inset 0 0 50px rgba(0,0,0,0.9);
+  background: linear-gradient(180deg, #050510, #000);
+  border: 2px solid rgba(50,50,80,0.2);
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.9);
 }
 .layer-display .display-notch {
   position: absolute;
@@ -1362,7 +1353,7 @@ footer strong { color: rgba(255,255,255,0.8); }
   transform: translateX(-50%);
   width: 90px;
   height: 28px;
-  background: #000;
+  background: rgba(0,0,0,0.8);
   border-radius: 0 0 16px 16px;
   z-index: 2;
 }
@@ -1375,36 +1366,29 @@ footer strong { color: rgba(255,255,255,0.8); }
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%, #2a2a2a, #111);
-  border: 1px solid #222;
+  background: radial-gradient(circle at 40% 35%, rgba(100,100,100,0.2), rgba(20,20,20,0.1));
+  border: 1px solid rgba(50,50,50,0.2);
 }
 .layer-display .app-icon {
   position: absolute;
   width: 16px;
   height: 16px;
   border-radius: 4px;
-  opacity: 0.7;
+  opacity: 0.8;
 }
-.layer-display .app-icon-1 { top: 42px; left: 26px; background: #3498db; }
-.layer-display .app-icon-2 { top: 42px; left: 50px; background: #2ecc71; }
-.layer-display .app-icon-3 { top: 42px; right: 26px; background: #e74c3c; }
-.layer-display .app-icon-4 { top: 66px; left: 26px; background: #f39c12; }
-.layer-display .app-icon-5 { top: 66px; left: 50px; background: #9b59b6; }
+.layer-display .app-icon-1 { top: 42px; left: 26px; background: rgba(52,152,219,0.4); box-shadow: 0 0 8px rgba(52,152,219,0.15); }
+.layer-display .app-icon-2 { top: 42px; left: 50px; background: rgba(46,204,113,0.4); box-shadow: 0 0 8px rgba(46,204,113,0.15); }
+.layer-display .app-icon-3 { top: 42px; right: 26px; background: rgba(231,76,60,0.4); box-shadow: 0 0 8px rgba(231,76,60,0.15); }
+.layer-display .app-icon-4 { top: 66px; left: 26px; background: rgba(243,156,18,0.4); box-shadow: 0 0 8px rgba(243,156,18,0.15); }
+.layer-display .app-icon-5 { top: 66px; left: 50px; background: rgba(155,89,182,0.4); box-shadow: 0 0 8px rgba(155,89,182,0.15); }
 .layer-display .ui-bar {
   position: absolute;
   height: 4px;
   border-radius: 2px;
 }
-.layer-display .ui-bar-1 { top: 42px; right: 58px; width: 20px; background: #555; }
-.layer-display .ui-bar-2 { top: 42px; right: 34px; width: 10px; background: #555; }
-.layer-display .ui-bar-3 { top: 66px; right: 34px; width: 16px; height: 16px; border-radius: 4px; background: #1a1a1a; border: 1px solid #2a2a2a; }
-.layer-display .content-line {
-  height: 5px;
-  background: linear-gradient(90deg, #1a1a1a, #2a2a2a, #1a1a1a);
-  border-radius: 2px;
-  width: 80%;
-}
-.layer-display .content-line-short { width: 50%; }
+.layer-display .ui-bar-1 { top: 42px; right: 58px; width: 20px; background: rgba(100,100,100,0.3); }
+.layer-display .ui-bar-2 { top: 42px; right: 34px; width: 10px; background: rgba(100,100,100,0.2); }
+.layer-display .ui-bar-3 { top: 66px; right: 34px; width: 16px; height: 16px; border-radius: 4px; background: rgba(20,20,20,0.3); border: 1px solid rgba(50,50,50,0.2); }
 .layer-display .content-area {
   position: absolute;
   top: 100px;
@@ -1416,6 +1400,13 @@ footer strong { color: rgba(255,255,255,0.8); }
   gap: 5px;
   align-items: center;
 }
+.layer-display .content-line {
+  height: 5px;
+  background: linear-gradient(90deg, rgba(30,30,50,0.3), rgba(50,50,80,0.2), rgba(30,30,50,0.3));
+  border-radius: 2px;
+  width: 80%;
+}
+.layer-display .content-line-short { width: 50%; }
 .layer-display .display-home-indicator {
   position: absolute;
   bottom: 10px;
@@ -1423,14 +1414,14 @@ footer strong { color: rgba(255,255,255,0.8); }
   transform: translateX(-50%);
   width: 40px;
   height: 5px;
-  background: #1a1a1a;
+  background: rgba(50,50,50,0.3);
   border-radius: 3px;
 }
 
-/* GLASS - Subtle reflections */
+/* GLASS - Subtle reflections on dark */
 .layer-glass .layer-inner {
-  background: linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 40%, rgba(200,220,255,0.03) 60%, rgba(255,255,255,0.04) 100%);
-  border: 2px solid rgba(255,255,255,0.08);
+  background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.005) 40%, rgba(100,150,255,0.02) 60%, rgba(255,255,255,0.02) 100%);
+  border: 2px solid rgba(255,255,255,0.05);
 }
 .glass-shine::before {
   content: '';
@@ -1439,7 +1430,7 @@ footer strong { color: rgba(255,255,255,0.8); }
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.05) 38%, rgba(255,255,255,0.08) 42%, transparent 50%);
+  background: linear-gradient(135deg, transparent 25%, rgba(255,255,255,0.03) 35%, rgba(255,255,255,0.05) 40%, transparent 48%);
   animation: glass-shine 5s ease-in-out infinite;
 }
 .glass-shine::after {
@@ -1449,7 +1440,7 @@ footer strong { color: rgba(255,255,255,0.8); }
   left: 16px;
   width: 50px;
   height: 6px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent);
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), transparent);
   border-radius: 3px;
 }
 @keyframes glass-shine {
