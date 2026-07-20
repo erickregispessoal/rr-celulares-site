@@ -1050,13 +1050,12 @@ footer strong { color: rgba(255,255,255,0.8); }
   position: absolute;
   right: -90px;
   top: 50%;
-  transform: translateY(-50%) translateZ(0);
+  transform: translateY(-50%) translateX(0);
   font-size: 0.65rem;
   font-weight: 600;
   color: rgba(255,255,255,0.5);
   white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 1;
   pointer-events: none;
   letter-spacing: 0.3px;
   text-transform: uppercase;
@@ -1070,11 +1069,6 @@ footer strong { color: rgba(255,255,255,0.8); }
   width: 16px;
   height: 1px;
   background: rgba(255,255,255,0.2);
-}
-
-.iphone-3d-wrapper:hover .layer-tag {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0);
 }
 
 /* --- Layer specific styles --- */
@@ -1269,13 +1263,27 @@ footer strong { color: rgba(255,255,255,0.8); }
   50% { transform: translateX(30%) translateY(30%); }
 }
 
-/* Exploded state on hover */
-.iphone-3d-wrapper:hover .layer-back { transform: translateZ(-40px); box-shadow: 0 0 30px rgba(204,0,0,0.15); }
-.iphone-3d-wrapper:hover .layer-battery { transform: translateZ(10px); }
-.iphone-3d-wrapper:hover .layer-logic { transform: translateZ(50px); }
-.iphone-3d-wrapper:hover .layer-midframe { transform: translateZ(90px); }
-.iphone-3d-wrapper:hover .layer-display { transform: translateZ(130px); }
-.iphone-3d-wrapper:hover .layer-glass { transform: translateZ(170px); box-shadow: 0 0 40px rgba(255,255,255,0.05); }
+/* Exploded state as default (always visible) */
+.layer-back { transform: translateZ(-40px); box-shadow: 0 0 30px rgba(204,0,0,0.15); }
+.layer-battery { transform: translateZ(10px); }
+.layer-logic { transform: translateZ(50px); }
+.layer-midframe { transform: translateZ(90px); }
+.layer-display { transform: translateZ(130px); }
+.layer-glass { transform: translateZ(170px); box-shadow: 0 0 40px rgba(255,255,255,0.05); }
+
+/* On hover: subtle extra separation + glow */
+.iphone-3d-wrapper:hover .layer-back { transform: translateZ(-50px); box-shadow: 0 0 40px rgba(204,0,0,0.25); }
+.iphone-3d-wrapper:hover .layer-battery { transform: translateZ(20px); }
+.iphone-3d-wrapper:hover .layer-logic { transform: translateZ(65px); }
+.iphone-3d-wrapper:hover .layer-midframe { transform: translateZ(110px); }
+.iphone-3d-wrapper:hover .layer-display { transform: translateZ(155px); }
+.iphone-3d-wrapper:hover .layer-glass { transform: translateZ(200px); }
+
+/* Tags visible by default */
+.layer-tag {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
 
 /* Hint text */
 .iphone-3d-hint {
@@ -1576,7 +1584,7 @@ footer strong { color: rgba(255,255,255,0.8); }
           </div>
         </div>
         <div class="iphone-3d-hint">
-          <svg class="icon icon-sm"><use href="#icon-move"/></svg> Passe o mouse para explodir
+          <svg class="icon icon-sm"><use href="#icon-move"/></svg> Arraste o mouse para girar
         </div>
       </div>
       <div class="hero-badge">
@@ -2119,14 +2127,11 @@ function initIPhone3D() {
 
     scene.style.transform = 'rotateY(' + rotateY + 'deg) rotateX(' + rotateX + 'deg)';
 
-    var isHover = true;
     layers.forEach(function(layer, i) {
       var depth = parseFloat(layer.dataset.depth) || 0;
       var layerRotateY = x * (4 + depth * 0.5);
       var layerRotateX = y * (-4 - depth * 0.5);
-      var zOffset = isHover ? depth * 42 : 0;
-      var extraZ = (1 - Math.abs(x)) * depth * 6;
-      layer.style.transform = 'translateZ(' + (zOffset + extraZ) + 'px) rotateY(' + layerRotateY + 'deg) rotateX(' + layerRotateX + 'deg)';
+      layer.style.transform = 'rotateY(' + layerRotateY + 'deg) rotateX(' + layerRotateX + 'deg)';
     });
   });
 
