@@ -2028,18 +2028,28 @@ var DEFAULT_DATA = {
   mapRegion: 'São Judas — Próximo ao centro'
 };
 
+var FIREBASE_URL = 'https://rr-celulares-2d0ca-default-rtdb.firebaseio.com/rr_data.json';
+
 function getData() {
-  try {
-    var saved = localStorage.getItem('rr_data');
-    if (saved) {
-      var parsed = JSON.parse(saved);
-      for (var key in DEFAULT_DATA) {
-        if (!parsed[key]) parsed[key] = DEFAULT_DATA[key];
+  return fetch(FIREBASE_URL)
+    .then(function(res) { return res.json(); })
+    .then(function(remote) {
+      if (remote) {
+        for (var key in DEFAULT_DATA) {
+          if (!remote[key]) remote[key] = DEFAULT_DATA[key];
+        }
+        try { localStorage.setItem('rr_data', JSON.stringify(remote)); } catch(e) {}
+        return remote;
       }
-      return parsed;
-    }
-  } catch(e) {}
-  return JSON.parse(JSON.stringify(DEFAULT_DATA));
+      return JSON.parse(JSON.stringify(DEFAULT_DATA));
+    })
+    .catch(function() {
+      try {
+        var saved = localStorage.getItem('rr_data');
+        if (saved) return JSON.parse(saved);
+      } catch(e) {}
+      return JSON.parse(JSON.stringify(DEFAULT_DATA));
+    });
 }
 
 function escHtml(s) {
@@ -2058,8 +2068,12 @@ function starsHtml() {
 }
 
 function render() {
-  var data = getData();
+  getData().then(function(data) {
+    renderWithData(data);
+  });
+}
 
+function renderWithData(data) {
   // About
   if (document.getElementById('aboutYears')) document.getElementById('aboutYears').textContent = data.aboutYears;
   if (document.getElementById('aboutTagline')) document.getElementById('aboutTagline').textContent = data.aboutTagline;
