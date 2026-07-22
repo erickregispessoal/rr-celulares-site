@@ -520,26 +520,49 @@ var DEFAULT_DATA = {
   mapRegion: 'S\u00e3o Judas — Pr\u00f3ximo ao centro'
 };
 
+var FIREBASE_URL = 'https://rr-celulares-2d0ca-default-rtdb.firebaseio.com/rr_data.json';
+
 var data = {};
 
 function loadData() {
+  return fetch(FIREBASE_URL)
+    .then(function(res) { return res.json(); })
+    .then(function(remote) {
+      if (remote) {
+        data = remote;
+        for (var key in DEFAULT_DATA) {
+          if (!data[key]) data[key] = JSON.parse(JSON.stringify(DEFAULT_DATA[key]));
+        }
+        try { localStorage.setItem('rr_data', JSON.stringify(data)); } catch(e) {}
+      } else {
+        // Banco ainda vazio: usa cache local (se houver) ou padrão, e envia pro Firebase
+        data = loadLocalCache();
+        saveData();
+      }
+    })
+    .catch(function() {
+      // Sem internet ou Firebase indisponível: usa último cache salvo neste dispositivo
+      data = loadLocalCache();
+    });
+}
+
+function loadLocalCache() {
   try {
     var saved = localStorage.getItem('rr_data');
-    if (saved) {
-      data = JSON.parse(saved);
-      for (var key in DEFAULT_DATA) {
-        if (!data[key]) data[key] = JSON.parse(JSON.stringify(DEFAULT_DATA[key]));
-      }
-    } else {
-      data = JSON.parse(JSON.stringify(DEFAULT_DATA));
-    }
-  } catch(e) {
-    data = JSON.parse(JSON.stringify(DEFAULT_DATA));
-  }
+    if (saved) return JSON.parse(saved);
+  } catch(e) {}
+  return JSON.parse(JSON.stringify(DEFAULT_DATA));
 }
 
 function saveData() {
-  localStorage.setItem('rr_data', JSON.stringify(data));
+  try { localStorage.setItem('rr_data', JSON.stringify(data)); } catch(e) {}
+  return fetch(FIREBASE_URL, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(function(e) {
+    console.error('Erro ao salvar no Firebase:', e);
+  });
 }
 
 function showToast(msg, type) {
@@ -551,8 +574,12 @@ function showToast(msg, type) {
 }
 
 function saveAll() {
-  saveData();
-  showToast('Dados salvos com sucesso!', 'success');
+  showToast('Salvando...', 'success');
+  saveData().then(function() {
+    showToast('Dados salvos com sucesso!', 'success');
+  }).catch(function() {
+    showToast('Salvo neste dispositivo, mas houve erro ao sincronizar', 'error');
+  });
 }
 
 function resetAll() {
@@ -852,8 +879,7 @@ if (!isLoggedIn()) {
   hideLogin();
 }
 
-loadData();
-render();
+loadData().then(render);
 </script>
 </body>
 </html>
